@@ -61,7 +61,7 @@ module.exports = {
         }
 
         const embed = new EmbedBuilder()
-            .setColor('#6A4C93') // morado suave
+            .setColor('#d13e25') // morado suave
             .setTitle(`${author.username} abrazó a ${target.username} 🤗`)
             .setAuthor({
                 name: interaction.client.user.username,

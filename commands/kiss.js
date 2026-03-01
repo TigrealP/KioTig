@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const NOVIO_ID = '811091271023722586';
 const TU_ID = '765660693835415552';
 
-var besos = ['https://pbs.twimg.com/media/HBXsyWrWcAAegjv?format=png&name=small',
+let besos = ['https://pbs.twimg.com/media/HBXsyWrWcAAegjv?format=png&name=small',
             'https://pbs.twimg.com/media/Gz_hSE9bgAA8YnN?format=jpg&name=4096x4096',
             'https://pbs.twimg.com/media/HBJb1INaUAAvvHb?format=jpg&name=4096x4096',
             'https://pbs.twimg.com/media/G00dzoSawAAVXQr?format=jpg&name=large',
