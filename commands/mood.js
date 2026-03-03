@@ -45,8 +45,22 @@ let dominanteMood = {
             'https://media.discordapp.net/attachments/1477732500108480755/1477756133967135025/physen_-_4979704.jpg?ex=69a5eb25&is=69a499a5&hm=3593e9e34dda10725b25b0384b6545eddf09db7fe0178146ab314205156a293c&=&format=webp&width=602&height=712',
             'https://media.discordapp.net/attachments/1477732500108480755/1477756134319460423/purtropos_-_6201146.jpg?ex=69a5eb25&is=69a499a5&hm=e0be868f4d8086815ec396fa8f6a95de9cd37bf5eeb1673293df0f3d73bc79e6&=&format=webp&width=809&height=712',
             'https://media.discordapp.net/attachments/1477732500108480755/1477756194549403678/koko2unite_-_6074238.jpg?ex=69a5eb34&is=69a499b4&hm=7f42e9e622fbbe37db0d4ed6e33cedbac43aeadb0c8755a1fc8a18f882424deb&=&format=webp&width=300&height=712',
-            'https://media.discordapp.net/attachments/1477732500108480755/1477756194872627280/koutanagamori_venterno_anthroworks_-_6000097.jpg?ex=69a5eb34&is=69a499b4&hm=1a8a99ccfc4b5a6d39d7376f5e71c2fe414e10a2b66a55693fcdc8cb3746801d&=&format=webp&width=897&height=712']
-};
+            'https://media.discordapp.net/attachments/1477732500108480755/1477756194872627280/koutanagamori_venterno_anthroworks_-_6000097.jpg?ex=69a5eb34&is=69a499b4&hm=1a8a99ccfc4b5a6d39d7376f5e71c2fe414e10a2b66a55693fcdc8cb3746801d&=&format=webp&width=897&height=712',
+            'https://media.discordapp.net/attachments/1477571857375957064/1478234196953796710/8d979f28d4c1e90ef1a524995a71c636.png?ex=69a7a860&is=69a656e0&hm=fb3ad22a1de74760cef094e4d4c3d5e3b199b20c8ba4b354ba299d68435b17b2&=&format=webp&quality=lossless&width=763&height=726',
+            'https://media.discordapp.net/attachments/1477571857375957064/1478239566350778368/9844cc42779ca86142104a5d6d5ebc23.jpg?ex=69a7ad60&is=69a65be0&hm=661dff73bdb24b2f14fed0cde2c05136ed0f7f2f5789855fd03687782171a0e6&=&format=webp&width=608&height=726',
+            'https://media.discordapp.net/attachments/1477571857375957064/1478239566015102998/5e4c332de362992f4aeeb99aca47e988.jpg?ex=69a7ad60&is=69a65be0&hm=c3058a626555a926ea186eb82273cb0ffb95cc520726ae4231001c6c527030e0&=&format=webp&width=458&height=725',
+            'https://media.discordapp.net/attachments/1477571857375957064/1478240443492864140/2a0ba078beb4e5c638d84a238a9ffd7d.jpg?ex=69a7ae32&is=69a65cb2&hm=440f218a857b345de05453142de79c1d83901552f6b2724ace835f26e63e63c7&=&format=webp',
+            'https://media.discordapp.net/attachments/1477571857375957064/1478240443966947338/5d9d7781e83a00364b0fc6c9348d54b8.jpg?ex=69a7ae32&is=69a65cb2&hm=5cf96db559cd4db0cc1de9d9f3acf42e14eee335b2bc547227c6979ce6567ec0&=&format=webp&width=805&height=726',   
+            'https://media.discordapp.net/attachments/1477571857375957064/1478243789813321778/425e498428dfb079c95fe83266c4567d.jpg?ex=69a7b14f&is=69a65fcf&hm=900d5215fa2a8a065c6e5ddaf28bd832d9a5fbe8ab723cdf6700e32099c91fe1&=&format=webp&width=1046&height=726',
+            'https://media.discordapp.net/attachments/1477571857375957064/1478243789175914516/20f81054d02b3e2fd10b79ec8ed0303e.png?ex=69a7b14f&is=69a65fcf&hm=311e377a815256bb0ff22727ef4c91e68e305ddbec6ca2ac31261e231e416580&=&format=webp&quality=lossless&width=532&height=726',
+            'https://media.discordapp.net/attachments/1477571857375957064/1478243788664340480/081c76b0a0a0b9127c390c24c4793350.jpg?ex=69a7b14f&is=69a65fcf&hm=28d7d8a7c161e61613df518b9ef5fd868f2d7d6a730bdf9ac7e638d8278fa9e2&=&format=webp&width=545&height=726',
+            'https://media.discordapp.net/attachments/1477571857375957064/1478251050853990441/18d854a160c82ee9e48df72d29ad9f5c.jpg?ex=69a7b813&is=69a66693&hm=f29ac17a8d17583d52a691e448d1ff63b5d176e74d62220d55289236569c8d30&=&format=webp&width=826&height=789',
+            'https://media.discordapp.net/attachments/1477571857375957064/1478251104008405082/66dec0408bc1276a02168b4b24c5c9a0.jpg?ex=69a7b81f&is=69a6669f&hm=f0f18eb9a6701159f0d1cdcdb24380e4c60d9258d2236cb01ab575234bd8704e&=&format=webp&width=450&height=830',
+            'https://media.discordapp.net/attachments/1477571857375957064/1478251136401014855/1bbae9a6607cb7d467dce5fc8ef6a18d.png?ex=69a7b827&is=69a666a7&hm=fe1d124bbef863831b10736309401a23a1924df807b3834a748920d5eed27820&=&format=webp&quality=lossless&width=586&height=726',
+            'https://media.discordapp.net/attachments/1477571857375957064/1478243788253036797/0573bcea14dfae8eec7577c42b3defcb.jpg?ex=69a7b14f&is=69a65fcf&hm=a81c312abea1cfebd77590c5e8af85c2ed950591e8ee062c81436b9aba77bae3&=&format=webp&width=990&height=726',
+            'https://media.discordapp.net/attachments/1477571857375957064/1478243787712233584/20aea889f3c137f07d9747744ab41ea9.jpg?ex=69a7b14f&is=69a65fcf&hm=713bb76401bc610698c8710905cff9e9258fe19f8e85dbea0c931a6c05ce1ad6&=&format=webp&width=654&height=726'
+        ]
+    };
 
 let sumisoMood = {
     name: 'Sumiso 🐶',
@@ -61,8 +75,21 @@ let sumisoMood = {
         'https://media.discordapp.net/attachments/1477732500108480755/1477756077079658606/kamyuelo_-_5527528.jpg?ex=69a5eb18&is=69a49998&hm=976d2212a02441025968e8dcb41c81eb59c94f8bb4ebcdc341d76ca7d84f80d5&=&format=webp&width=561&height=712',
         'https://media.discordapp.net/attachments/1477732500108480755/1477756077951942676/brownh0und_-_6190929.png?ex=69a5eb18&is=69a49998&hm=85f33e97b718f89952d491bc3a47679d6f7e04f0b81c06487cb4d6bf9adba301&=&format=webp&quality=lossless&width=554&height=711',
         'https://media.discordapp.net/attachments/1477732500108480755/1477756078262583347/20260301_143909.jpg?ex=69a5eb18&is=69a49998&hm=271e2c70021ff2d49110b9c302c0e118affb2f66cd5c0bf6fedca474bf1e32f8&=&format=webp&width=1032&height=712',
-        'https://media.discordapp.net/attachments/1477732500108480755/1477756078858047538/20260301_143858.jpg?ex=69a5eb18&is=69a49998&hm=78fba69fc0de4ea9a60a13823637dc0b80a70b775b46f24fd17d2b56f5997c5d&=&format=webp&width=951&height=712'
-    ],
+        'https://media.discordapp.net/attachments/1477732500108480755/1477756078858047538/20260301_143858.jpg?ex=69a5eb18&is=69a49998&hm=78fba69fc0de4ea9a60a13823637dc0b80a70b775b46f24fd17d2b56f5997c5d&=&format=webp&width=951&height=712',
+        'https://media.discordapp.net/attachments/1477571857375957064/1478215149700776047/968553e7614a1b1ff68557c739c180b3.png?ex=69a796a3&is=69a64523&hm=00b0b2734ffd61529b430bd6b6820c163da72a158bb1ac0f4f7fdd9cd70c6984&=&format=webp&quality=lossless&width=746&height=815',
+        'https://media.discordapp.net/attachments/1477571857375957064/1478215205040422922/33dad4c4dca76aa8a0bc0fa6b6af353a.jpg?ex=69a796b0&is=69a64530&hm=d1cddcac95a44322406a7a377fe95ff5098944f0b2c257f05908abc5564c8af6&=&format=webp&width=1006&height=726',
+        'https://media.discordapp.net/attachments/1477571857375957064/1478215186946199706/fda37f8d73a7ab24e4fd2536ce0a3ad0.png?ex=69a796ac&is=69a6452c&hm=c9f1c1a8ac8d7cb99cd781aa701a3137effffc7ab17484a96c02c1190890d47c&=&format=webp&quality=lossless&width=1041&height=726',
+        'https://media.discordapp.net/attachments/1477571857375957064/1478215254436614296/60d3c91bc1357a6ef89ca6815a889f6b.png?ex=69a796bc&is=69a6453c&hm=8099cff3a60903163a5714aff3b78de38cd53ff712e6f138acf815c49ec4463d&=&format=webp&quality=lossless&width=719&height=726',
+        'https://media.discordapp.net/attachments/1477571857375957064/1478215254834942002/0681c2513ee2d9a722c9c63f61d6bd00.png?ex=69a796bc&is=69a6453c&hm=d8646a486da268ce836d6eb0c9cff91aba70339e71c6c6feee57f77d8b4ee8a5&=&format=webp&quality=lossless&width=772&height=726',        
+        'https://media.discordapp.net/attachments/1477571857375957064/1478215149700776047/968553e7614a1b1ff68557c739c180b3.png?ex=69a796a3&is=69a64523&hm=00b0b2734ffd61529b430bd6b6820c163da72a158bb1ac0f4f7fdd9cd70c6984&=&format=webp&quality=lossless&width=759&height=830',
+        'https://media.discordapp.net/attachments/1477571857375957064/1478234196953796710/8d979f28d4c1e90ef1a524995a71c636.png?ex=69a7a860&is=69a656e0&hm=fb3ad22a1de74760cef094e4d4c3d5e3b199b20c8ba4b354ba299d68435b17b2&=&format=webp&quality=lossless&width=763&height=726',
+        'https://media.discordapp.net/attachments/1477571857375957064/1478234197515829332/3b4b0ce976861d532f5556b155fe9ee6.png?ex=69a7a860&is=69a656e0&hm=7e0b18128c11c63f4ea33b0ec83de2375f5c36c6f5e21bd4e952b4263ec9c822&=&format=webp&quality=lossless&width=962&height=725',
+        'https://media.discordapp.net/attachments/1477571857375957064/1478234198304358482/e3152da26374a0da3684329692213378.png?ex=69a7a861&is=69a656e1&hm=70f03f5f3acf876d0bb15eb6b6968f3116dd438c242e989d00167facd1352606&=&format=webp&quality=lossless&width=671&height=726',
+        'https://media.discordapp.net/attachments/1477571857375957064/1478251104008405082/66dec0408bc1276a02168b4b24c5c9a0.jpg?ex=69a7b81f&is=69a6669f&hm=f0f18eb9a6701159f0d1cdcdb24380e4c60d9258d2236cb01ab575234bd8704e&=&format=webp&width=450&height=830',
+        'https://media.discordapp.net/attachments/1477571857375957064/1478251137072234526/a89bd7f376136145a69cb3d3365983b3.jpg?ex=69a7b827&is=69a666a7&hm=538487bc546b9046d499236a6e80ee2b1ce230dcf6e2cf2b038fd42c1353a371&=&format=webp&width=408&height=725',
+        'https://media.discordapp.net/attachments/1477571857375957064/1478251137642795089/a52014454e17a99cba35be9a04f3b313.jpg?ex=69a7b827&is=69a666a7&hm=dec916f81d59da6f2c42ba9d47009802e56516030e806587743d99030ff3e28d&=&format=webp&width=729&height=726',
+        'https://media.discordapp.net/attachments/1477571857375957064/1478251138078867581/b670356fb226214e6336f3d3ad08aacd.jpg?ex=69a7b827&is=69a666a7&hm=a01820cd545a89e32e516161ffde6254c5b43ee3215446d48f3f7e7a86098ea4&=&format=webp&width=530&height=726',
+    ]
 };
 
 module.exports = {

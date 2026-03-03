@@ -8,7 +8,16 @@ let besos = ['https://pbs.twimg.com/media/HBXsyWrWcAAegjv?format=png&name=small'
             'https://pbs.twimg.com/media/HBJb1INaUAAvvHb?format=jpg&name=4096x4096',
             'https://pbs.twimg.com/media/G00dzoSawAAVXQr?format=jpg&name=large',
             'https://cdn.discordapp.com/attachments/1477571857375957064/1477577453294846043/ssstwitter.com_1772352264195.gif?ex=69a544bc&is=69a3f33c&hm=52c61be7b4a297bf762ba4283e14ca7e7a102f97eb5f2cdec2da40cf15bc1ec6&',
-            'https://media.discordapp.net/attachments/1477571857375957064/1477578416554508288/GW0atZpWQAAG1cS.jpg?ex=69a545a2&is=69a3f422&hm=c5ae6f1a29991410fc61deb00d30ae4f5a980b8a0e59f2cfb71a89c53eb079c5&=&format=webp']
+            'https://media.discordapp.net/attachments/1477571857375957064/1477578416554508288/GW0atZpWQAAG1cS.jpg?ex=69a545a2&is=69a3f422&hm=c5ae6f1a29991410fc61deb00d30ae4f5a980b8a0e59f2cfb71a89c53eb079c5&=&format=webp',
+            'https://media.discordapp.net/attachments/1477571857375957064/1477963187897766009/furry-furry-kiss.gif?ex=69a6abfb&is=69a55a7b&hm=2b7bfd030496f486b202d0500b4239b7964d5d88cae6c9cf4953ff04c1b0492a&=',
+            'https://media.discordapp.net/attachments/1477571857375957064/1477964614582009966/furry-kiss.gif?ex=69a6ad4f&is=69a55bcf&hm=9bb912515349f918ff18a1cee0426c000fb768aa5a4177acc970b4098f0a98fc&=',
+            'https://media.discordapp.net/attachments/1477571857375957064/1478217755638370596/a76dce1963f268e87255dcb8a6faada9.jpg?ex=69a79910&is=69a64790&hm=a7b4f707b3a6de557969fa1dd02828983ee2cc4df2aab947d10b8c3a4c68c243&=&format=webp&width=853&height=712',
+            'https://media.discordapp.net/attachments/1477571857375957064/1478217755927908423/135a00a47b11fe1370202d58eed12959.jpg?ex=69a79910&is=69a64790&hm=b74c54a822d797ae00b28b44f774a26ff01030a58bbdcf201f86d259389d832f&=&format=webp&width=874&height=712',
+            'https://media.discordapp.net/attachments/1477571857375957064/1478234132743196753/9e1d58e1c558472b4cad5d2ac77a6493.jpg?ex=69a7a851&is=69a656d1&hm=c8d5ce68545d3a9858c1af73c68826164d2a1310dff32d79b91af9a3cc6bb8a9&=&format=webp&width=484&height=726',
+            'https://media.discordapp.net/attachments/1477571857375957064/1478234133447835823/fd961910f8033ef0307a314920fb9517.png?ex=69a7a851&is=69a656d1&hm=ca066ebf42a27184a9be80b1aa08bed27c0df5b537833f5729ee9eec1b2d3c1c&=&format=webp&quality=lossless&width=917&height=726',
+            ''
+            ];
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('kiss')
@@ -64,7 +73,7 @@ module.exports = {
             })
             .setThumbnail(target.displayAvatarURL({ dynamic: true }))
             .setImage(besos[Math.floor(Math.random() * besos.length)])
-            .setDescription(`¡Qué lindo beso! ${author.username} y ${target.username} se ven adorables juntos 🐶`)
+            .setDescription(`${author.username} y ${target.username} se han dado uno hermoso beso! 🐶`)
             .setFooter({
                 text: 'Tigre adora a su cachorrito 🐯❤️🐶',
             })
