@@ -5,6 +5,12 @@ const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const client = new Client({
     intents: [GatewayIntentBits.Guilds]
 });
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.MONGO_URI)
+.then(() => console.log('MongoDB conectado 🔥'))
+.catch(err => console.error(err));
+
 
 client.commands = new Collection();
 

@@ -10,6 +10,7 @@ const TU_ID = '765660693835415552';
 
 let moodsBase = [
     {
+        id: 'celoso',
         name: 'Celoso 😡',
         description: (author) => `Oh! al parecer ${author} está celoso hoy 🐯🐶`,
         image: ['https://i.pinimg.com/736x/b7/9e/4a/b79e4a4e5834527efcce568d6424101a.jpg',
@@ -18,6 +19,7 @@ let moodsBase = [
                 'https://i.pinimg.com/736x/49/aa/a1/49aaa1161abd66053da68b99295f068b.jpg']
     },
     {
+        id: 'mimoso',
         name: 'Mimoso 🐯🧡🐶',
         description: (author) => `${author} se siente mimoso hoy, ven y dale cariñito! 🐯🐶`,
         image: ['https://i.pinimg.com/736x/23/15/7a/23157ac5cbbd11e1452264585de7191e.jpg',
@@ -27,6 +29,7 @@ let moodsBase = [
                 'https://i.pinimg.com/1200x/9f/22/4c/9f224c082e9101854485aac41928d942.jpg']
     },
     {
+        id: 'needy',
         name: 'Needy 🥀',
         description: (author) => `Al parecer ${author} siente que lo tienes descuidado y necesita atención extra hoy 🐯🐶`,
         image: ['https://i.pinimg.com/736x/38/6a/6c/386a6c208e06f5764de42acfe9876632.jpg',
@@ -37,6 +40,7 @@ let moodsBase = [
 ];
 
 let dominanteMood = {
+    id: 'dominante',
     name: 'Dominante 🐯',
     description: (author) => `${author} hoy quiere que le obedezcas sin cuestionar, <@${NOVIO_ID}> 🐯`,
     image: ['https://media.discordapp.net/attachments/1477732500108480755/1477756132612374529/zunzunhu_-_6063057.jpg?ex=69a5eb25&is=69a499a5&hm=becc12cb428dcd0a76cc68d5de8486baee956fcd03d94b5d1f9ad306dbf8949a&=&format=webp&width=571&height=712',
@@ -63,6 +67,7 @@ let dominanteMood = {
     };
 
 let sumisoMood = {
+    id: 'sumiso',
     name: 'Sumiso 🐶',
     description: (author) => `${author} hoy está especialmente obediente y esperando tus órdenes <@${TU_ID}> 🐶`,
     image: [
@@ -89,6 +94,7 @@ let sumisoMood = {
         'https://media.discordapp.net/attachments/1477571857375957064/1478251137072234526/a89bd7f376136145a69cb3d3365983b3.jpg?ex=69a7b827&is=69a666a7&hm=538487bc546b9046d499236a6e80ee2b1ce230dcf6e2cf2b038fd42c1353a371&=&format=webp&width=408&height=725',
         'https://media.discordapp.net/attachments/1477571857375957064/1478251137642795089/a52014454e17a99cba35be9a04f3b313.jpg?ex=69a7b827&is=69a666a7&hm=dec916f81d59da6f2c42ba9d47009802e56516030e806587743d99030ff3e28d&=&format=webp&width=729&height=726',
         'https://media.discordapp.net/attachments/1477571857375957064/1478251138078867581/b670356fb226214e6336f3d3ad08aacd.jpg?ex=69a7b827&is=69a666a7&hm=a01820cd545a89e32e516161ffde6254c5b43ee3215446d48f3f7e7a86098ea4&=&format=webp&width=530&height=726',
+        'https://static1.e621.net/data/sample/38/46/38468b95b31ad4466b6a2652c8462fb4.jpg'
     ]
 };
 
@@ -117,7 +123,7 @@ module.exports = {
                 availableMoods.map(mood => ({
                     label: mood.name,
                     description: `Mood: ${mood.name}`,
-                    value: mood.name
+                    value: mood.id
                 }))
             );
 
@@ -132,9 +138,23 @@ module.exports = {
             filter: i => i.user.id === author.id,
             time: 60000
         });
-
         collector.on('collect', async i => {
-            const selected = availableMoods.find(m => m.name === i.values[0]);
+            const User = require('../models/User');
+            const selected = availableMoods.find(m => m.id === i.values[0]);
+            console.log('Guardando mood para:', author.id);
+            console.log('Mood seleccionado:', selected.id);
+            
+            await User.findOneAndUpdate(
+                { userId: author.id },
+                {
+                    userId: author.id,
+                    currentMood: {
+                        name: selected.id,
+                        setAt: new Date()
+                    }
+                },
+                { upsert: true, new: true }
+            );
 
             let roleText = 'Hoy está...';
 
@@ -170,6 +190,7 @@ module.exports = {
                 embeds: [embed],
                 components: []
             });
+            console.log('Guardado en DB');
 
             collector.stop();
         });
