@@ -91,14 +91,30 @@ module.exports = {
                     });
                 }
 
+                const selectedImage = Array.isArray(actionObject.embed?.images) && actionObject.embed.images.length
+                    ? actionObject.embed.images[Math.floor(Math.random() * actionObject.embed.images.length)]
+                    : null;
+
+                const embedDescriptionTemplate = actionObject.embed?.description
+                    || `${author} ha decidido **${actionObject.label}** a ${targetUser} 💕`;
+
                 const embed = new EmbedBuilder()
-                    .setColor('#ff69b4')
-                    .setTitle("✨ Acción realizada ✨")
+                    .setColor(actionObject.embed?.color || '#ff69b4')
+                    .setTitle(actionObject.embed?.title || `✨ ${actionObject.label} ✨`)
                     .setDescription(
-                        `${author} ha decidido **${actionObject.label}** a ${targetUser} 💕`
+                        embedDescriptionTemplate
+                            .replaceAll('{author}', `${author}`)
+                            .replaceAll('{target}', `${targetUser}`)
                     )
                     .setThumbnail(author.displayAvatarURL({ dynamic: true }))
+                    .setFooter({
+                        text: actionObject.embed?.footer || `Mood objetivo: ${mood}`
+                    })
                     .setTimestamp();
+
+                if (selectedImage) {
+                    embed.setImage(selectedImage);
+                }
 
                 await i.update({
                     content: '',
