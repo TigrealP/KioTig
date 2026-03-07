@@ -32,7 +32,8 @@ module.exports = {
                     'https://i.pinimg.com/736x/af/10/9d/af109d280d7385b27e1cb143fc73d56c.jpg',
                     'https://i.pinimg.com/736x/59/d5/72/59d572aac500f903744e93c79d187fbe.jpg',
                     'https://i.pinimg.com/736x/3c/70/26/3c7026f3610d40d40967feb104e95cae.jpg',
-                    'https://i.pinimg.com/736x/9e/1c/9f/9e1c9f7911110165beaa5e5fea193f7b.jpg'
+                    'https://i.pinimg.com/736x/9e/1c/9f/9e1c9f7911110165beaa5e5fea193f7b.jpg',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1479292796396507278/G5wkltNXkAAZJ4Y.jpg?ex=69ad7c86&is=69ac2b06&hm=225e4a10357170ab47a4aca639e9d1df7cc0ec1127452f598f66e1cdf6369387&=&format=webp&width=544&height=726'
                 ],
                 footer: 'Que bonito es acurrucarse con tu persona favorita -> 🐶'
             }
@@ -53,7 +54,9 @@ module.exports = {
                     'https://static1.e621.net/data/sample/e9/21/e921eff88e2fb3d6a2c22de7cda74026.jpg',
                     'https://static1.e621.net/data/sample/4f/b2/4fb222724556475a3235f1eb158616e3.jpg',
                     'https://static1.e621.net/data/sample/76/48/7648907bf3ee86d90d91560f4b1a05bd.jpg',
-                    'https://static1.e621.net/data/sample/74/2b/742bd20fad9bf26d91be5d64b0deff86.jpg'
+                    'https://static1.e621.net/data/sample/74/2b/742bd20fad9bf26d91be5d64b0deff86.jpg',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1479976455869038634/G8EBO_OWoAY7d7j.jpg?ex=69adfefb&is=69acad7b&hm=285f9985cea796ba73bff92d36aea03e4c80514110eda31cbe29a91756936ed0&=&format=webp&width=484&height=726',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1479292795989528606/HCqpmbfWYAAveRm.jpg?ex=69ad7c86&is=69ac2b06&hm=f96528df2946feea66d1b1d4eada7c4950bd2b07595278276b445b5342456458&=&format=webp'
                 ]
             }
         },
@@ -108,7 +111,10 @@ module.exports = {
                     'https://static1.e621.net/data/sample/2f/40/2f4082356924a40f8aefe197caa1a06a.jpg',
                     'https://static1.e621.net/data/sample/e9/08/e908173c796686e37de01c7b2de8f667.jpg',
                     'https://static1.e621.net/data/sample/0b/df/0bdfe337ebb394965373119b5a2d407c.jpg',
-                    'https://static1.e621.net/data/sample/b7/8b/b78b136477563dbd6fc1b05a80c2fda3.jpg'
+                    'https://static1.e621.net/data/sample/b7/8b/b78b136477563dbd6fc1b05a80c2fda3.jpg',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1479976455478710355/HC1j7HLXMAAtUYF.jpg?ex=69adfefb&is=69acad7b&hm=1d08397aa47f9d4c6e6fd39b4fbcf57d912fc96783c3963889263b451096dc37&=&format=webp',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1479292795989528606/HCqpmbfWYAAveRm.jpg?ex=69ad7c86&is=69ac2b06&hm=f96528df2946feea66d1b1d4eada7c4950bd2b07595278276b445b5342456458&=&format=webp',
+                    'https://images-ext-1.discordapp.net/external/vPyjluI6dbuLKMG7-zwnxdKPSwrLkexeC9k5BsmpbRs/https/static1.e621.net/data/sample/2f/6a/2f6a6a24938e52b5c67775dd3ff87a42.jpg?format=webp&width=826&height=777'
                 ],
                 footer: 'Dominancia en curso'
             }
@@ -149,7 +155,11 @@ module.exports = {
                     'https://static1.e621.net/data/sample/1c/f8/1cf84641e2a34fbd8488459cdef97af9.jpg',
                     'https://static1.e621.net/data/sample/ad/43/ad4397fab177dfdd45b4d170890e3618.jpg',
                     'https://static1.e621.net/data/sample/0d/24/0d24c20e649e56f0f60f53c0a7c18400.jpg',
-                    'https://static1.e621.net/data/sample/4d/37/4d37d58cb6a4902f1c2b1cea67a417bb.jpg'
+                    'https://static1.e621.net/data/sample/4d/37/4d37d58cb6a4902f1c2b1cea67a417bb.jpg',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1479965987385245861/79db80d121186755c6319f2d3cf78242.jpg?ex=69adf53b&is=69aca3bb&hm=8ecc90b8857087902d24ba74d85a2e53d02c2857a09853dc307c0969e088ba2e&=&format=webp&width=968&height=726',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1479965987913863309/20250911_025335.jpg?ex=69adf53b&is=69aca3bb&hm=b93f37ca0509e96ca782b53e44ee8598ce44d283a845109f01fdb7a1ec6ed609&=&format=webp&width=726&height=726',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1479965988286890125/4130f83dfe310a5f984d76003e7d4127.jpg?ex=69adf53c&is=69aca3bc&hm=a20bf04ee3e1002dbac1ada09e5ad816ce3d4b9f880b5aa18bc54d0542048866&=&format=webp&width=813&height=726',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1479124902425530398/GS7wprNbIAMDI60.jpg?ex=69ad88e9&is=69ac3769&hm=386f88aee1eaf69fcdba365a3c909fdd36b8c7cd696c1148d58e99cc5c9c7c46&=&format=webp&width=558&height=726'
                 ],
                 footer: 'Al parecer está funcionando 🐯🔥'
             }

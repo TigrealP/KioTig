@@ -86,7 +86,11 @@ module.exports = {
                     'https://static1.e621.net/data/sample/77/f9/77f90014b091b29232ccb9dd08a95d27.jpg',
                     'https://static1.e621.net/data/sample/6c/52/6c527642ca16efe6a2b6d2a70aa5d233.jpg',
                     'https://static1.e621.net/data/sample/f4/fe/f4fe3c49f44d4beef1d8ddc1e5ea0689.jpg',
-                    'https://static1.e621.net/data/sample/15/4c/154ccef6209e7bf3691c053ec14eb29e.jpg'
+                    'https://static1.e621.net/data/sample/15/4c/154ccef6209e7bf3691c053ec14eb29e.jpg',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1479976457135718472/HCzYVN-aQAEBseT.jpg?ex=69adfefc&is=69acad7c&hm=275acabd1ace76e5983d0ac635721c4d38e7c7a93e2539eb8fba49178737eb02&=&format=webp',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1479603373404717179/G3fdgT9WMAElfWl.jpg?ex=69ad4c45&is=69abfac5&hm=d54326e8af872b983720be768c8087abd55f0a96ea5fc2875f60f66082c1182b&=&format=webp&width=861&height=726',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1479124902115282986/HCldwJnXQAAYLPh.jpg?ex=69ad88e9&is=69ac3769&hm=7a2e90a6ef7ce666bbe7928281b8c395afe89370e9273abc30553e04c0603b46&=&format=webp&width=458&height=726',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1479124902757007512/HCnMN4haAAA0KJ-.jpg?ex=69ad88e9&is=69ac3769&hm=54c9bdcbffa8f86fa3a5dac1e72a49a33820711d34d392039a67f963583fe06e&=&format=webp&width=514&height=726'
             ];
         }
 
