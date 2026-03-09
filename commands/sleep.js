@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const NOVIO_ID = '811091271023722586';
 const TU_ID = '765660693835415552';
 
-let besos = ['https://i.pinimg.com/736x/26/05/fb/2605fb43b462ce126a729e6cde5ab95c.jpg',
+let sueñitos = ['https://i.pinimg.com/736x/26/05/fb/2605fb43b462ce126a729e6cde5ab95c.jpg',
             'https://i.pinimg.com/736x/af/10/9d/af109d280d7385b27e1cb143fc73d56c.jpg',
             'https://i.pinimg.com/1200x/a3/67/9b/a3679b092905dc6fb5a08d6fdb899667.jpg',
             'https://media.discordapp.net/attachments/1477571857375957064/1480400269056671744/588ee62e9306e7faccc7fdee3846d141.jpg?ex=69af89b0&is=69ae3830&hm=601196fd4b92d3d5ab105d526fb533f9b33c8e8eac59ce8da265d3fe13dad151&=&format=webp',
@@ -35,7 +35,7 @@ module.exports = {
         const target = interaction.options.getUser('usuario');
         const author = interaction.user;
 
-        // 💋 Si intenta besarse a sí mismo
+        // 💤 Si intenta dormir con sí mismo
         if (target.id === author.id) {
 
             if (author.id === CACHORRITO_ID) {
@@ -74,7 +74,7 @@ module.exports = {
                 iconURL: interaction.client.user.displayAvatarURL()
             })
             .setThumbnail(target.displayAvatarURL({ dynamic: true }))
-            .setImage(besos[Math.floor(Math.random() * besos.length)])
+            .setImage(sueñitos[Math.floor(Math.random() * sueñitos.length)])
             .setDescription(`¡Es hora de dormir! 🐶`)
             .setFooter({
                 text: 'Se ven adorables junticos! 🐯❤️🐶',
