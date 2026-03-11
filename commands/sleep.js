@@ -22,7 +22,7 @@ let sueñitos = ['https://i.pinimg.com/736x/26/05/fb/2605fb43b462ce126a729e6cde5
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('Sleep')
+        .setName('sleep')
         .setDescription('TIG: duerme con su cachorrito ---- KIO: duerme con su dueño 🦊')
         .addUserOption(option =>
             option

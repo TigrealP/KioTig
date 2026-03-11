@@ -25,7 +25,10 @@ var abrazos = ['https://pbs.twimg.com/media/HCGiHQkXQAA1_1b?format=jpg&name=larg
     'https://media.discordapp.net/attachments/1477571857375957064/1478251006289641667/0f5f263624faebe43f6e840d5c8ac306.jpg?ex=69a7b808&is=69a66688&hm=6ba9a001ffa6f5112142b78b307a3c34011ca560950cb583492a76331810371d&=&format=webp&width=696&height=830',
     'https://media.discordapp.net/attachments/1477571857375957064/1478268303561588747/8cb60bf569c3970b6e04aec95c2485dd.jpg?ex=69a870e4&is=69a71f64&hm=93604d940f58605de899682363a404c8263e71f208a7306045ef64c4f380f297&=&format=webp&width=726&height=726',
     'https://media.discordapp.net/attachments/1477571857375957064/1478268303855063160/8262b52f470a7c5faddfc4d69e30329c.jpg?ex=69a870e4&is=69a71f64&hm=5f6273b675acd37895063fad3d9609679a36c30010aa42302f65658ffe689e0a&=&format=webp&width=726&height=726',
-    'https://media.discordapp.net/attachments/1477571857375957064/1478268304060842074/471b17955b9d7da820fcb1b6dc69423e.jpg?ex=69a870e4&is=69a71f64&hm=ad1d69078d86a1f385076e2df399b877b32cd1c34f36c3b7990dc64086863a55&=&format=webp'
+    'https://media.discordapp.net/attachments/1477571857375957064/1478268304060842074/471b17955b9d7da820fcb1b6dc69423e.jpg?ex=69a870e4&is=69a71f64&hm=ad1d69078d86a1f385076e2df399b877b32cd1c34f36c3b7990dc64086863a55&=&format=webp',
+    'https://media.discordapp.net/attachments/1477571857375957064/1480413071485698099/HCG3WbDbYAA9iDb.jpg?ex=69af959c&is=69ae441c&hm=2cd082f3fc6802616c83391e4c55724f272a4bb97694d5ea66d7491d45bceeb7&=&format=webp',
+    'https://media.discordapp.net/attachments/1477571857375957064/1480413071779303445/F1vIxHaWcAArD_t.jpg?ex=69af959d&is=69ae441d&hm=a46188f3b9d6bb6e5371fa17ab953ea6626295d0ae11e075f3961fa298a10251&=&format=webp',
+    'https://media.discordapp.net/attachments/1477571857375957064/1481071139101872198/fbe0f13c63320bc81009efd2405d68e8.jpg?ex=69b1fa7c&is=69b0a8fc&hm=b75ea6b62e4f04648c09a97e2f99e85a6ed43d1dbfd995cfed278ced926233a7&=&format=webp&width=638&height=830'
     ];
 
 module.exports = {
