@@ -7,7 +7,8 @@ const shy = [
     'https://pbs.twimg.com/media/HA-JwKdXwAAoMmd?format=jpg&name=small',
     'https://pbs.twimg.com/media/HBl9Kfra0AAkSh3?format=png&name=900x900',
     'https://media.discordapp.net/attachments/1477571857375957064/1477962590817615904/46d0cea5-8754-4103-a46b-ae46b136c7e6.jpg?ex=69a6ab6c&is=69a559ec&hm=c59991643b6970263704150d75d44a710136b9721f224491485ff9187f588760&=&format=webp&width=826&height=795',
-    'https://images-ext-1.discordapp.net/external/2hPgsjtw6UJQfHGaja2B2iv0-6C5TEg1EsTuTqglbOw/https/i.pinimg.com/736x/54/1d/b9/541db981ee205e7a0d7b090111afa055.jpg?format=webp&width=596&height=815'
+    'https://images-ext-1.discordapp.net/external/2hPgsjtw6UJQfHGaja2B2iv0-6C5TEg1EsTuTqglbOw/https/i.pinimg.com/736x/54/1d/b9/541db981ee205e7a0d7b090111afa055.jpg?format=webp&width=596&height=815',
+    'https://media.discordapp.net/attachments/1477571857375957064/1482207187362386062/HDVYk18aMAUINrI.png?ex=69b61c83&is=69b4cb03&hm=2bf2bdefb04019d4a5790d3167fa01addfe47ac36dfcd55e495dc27d59f697b8&=&format=webp&quality=lossless'
     ];
 
 module.exports = {

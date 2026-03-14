@@ -1,10 +1,11 @@
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = {
     mimoso: [
         {
             label: 'Acariciar',
             value: 'pat',
             embed: {
-                color: '#f472b6',
+                color: '#7e0404',
                 title: '🐯🐶 Una linda caricia de parte de {author}',
                 description: '{author} acarició con cariño a {target} 💞',
                 images: [
@@ -46,7 +47,7 @@ module.exports = {
             label: 'Ponerle una correa',
             value: 'correa',
             embed: {
-                color: '#7e0404',
+                color: '#ec8829',
                 title: '🦮 Correa colocada 🐶',
                 description: '{author} le puso una correa a {target} con firmeza 🐯🔥',
                 footer: 'Al parecer alguien es un cachorrito travieso, y se ve adorable! 🐾',
@@ -59,7 +60,8 @@ module.exports = {
                     'https://static1.e621.net/data/sample/74/2b/742bd20fad9bf26d91be5d64b0deff86.jpg',
                     'https://media.discordapp.net/attachments/1477571857375957064/1479976455869038634/G8EBO_OWoAY7d7j.jpg?ex=69adfefb&is=69acad7b&hm=285f9985cea796ba73bff92d36aea03e4c80514110eda31cbe29a91756936ed0&=&format=webp&width=484&height=726',
                     'https://media.discordapp.net/attachments/1477571857375957064/1479292795989528606/HCqpmbfWYAAveRm.jpg?ex=69ad7c86&is=69ac2b06&hm=f96528df2946feea66d1b1d4eada7c4950bd2b07595278276b445b5342456458&=&format=webp',
-                    'https://media.discordapp.net/attachments/1477571857375957064/1480007302147739830/G0OYzhoWkAALS9P.jpg?ex=69ae1bb6&is=69acca36&hm=4733598256f1a31ebe7fafd276deffafd09fa03fb0a3f6ccfea8909becc41975&=&format=webp&width=632&height=830'
+                    'https://media.discordapp.net/attachments/1477571857375957064/1480007302147739830/G0OYzhoWkAALS9P.jpg?ex=69ae1bb6&is=69acca36&hm=4733598256f1a31ebe7fafd276deffafd09fa03fb0a3f6ccfea8909becc41975&=&format=webp&width=632&height=830',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1482207187756388382/HDNUSGybQAM4Fvu.jpg?ex=69b61c83&is=69b4cb03&hm=6725b3c88f84fb83b8a9d9c78e74caaf1278e24a1e001871b823676dceec26bb&=&format=webp'
                 ]
             }
         },
@@ -67,7 +69,7 @@ module.exports = {
             label: 'Lamer',
             value: 'lick',
             embed: {
-                color: '#7e0404',
+                color: '#ec8829',
                 title: 'Al parecer {target} es un cachorrito delicioso 🐶',
                 description: '{author} tiene órdenes claras, con su boca y tu boquita, perrito 🐶🥂',
                 footer: 'al parecer alguien es un cachorrito muy sabroso 🐾',
@@ -84,7 +86,7 @@ module.exports = {
             label: 'nalguear',
             value: 'nalgada',
             embed: {
-                color: '#f43f5e',
+                color: '#ec8829',
                 title: '🍑 Nalgada recibida',
                 description: '{author} le dio una nalgada a {target} 🍑',
                 footer: 'Al parecer {target} disfruta de estas atenciones 🐾',
@@ -94,6 +96,29 @@ module.exports = {
                     'https://static1.e621.net/data/sample/e3/4d/e34d7f355579c68cb76a501825e922ca.jpg',
                     'https://static1.e621.net/data/sample/25/5f/255faf7040749ffff94d3dee179fcf15.jpg',
                     'https://static1.e621.net/data/sample/f2/8f/f28f792b149304d5b23072aaa6c1e239.jpg'
+                ]
+            }
+        },
+        {
+            label: 'provocacion',
+            value: 'provocar',
+            embed: {
+                color: '#ec8829',
+                title: 'Al parecer ${author} le está dando un buen show a su cachorrito! 🐯',
+                description: 'Su mascotita debe sentirse muy feliz por ello 🐶',
+                footer: 'Que sabroso se ve 🐯🦁',
+                images: [
+                    'https://media.discordapp.net/attachments/1477571857375957064/1482207217854976010/HDQiNkCbQAMlqMb.jpg?ex=69b61c8a&is=69b4cb0a&hm=1f330b718ddfa4f5f61d86575e2d9b87f56c999d5e2289b8f834b75ba32fd14c&=&format=webp',
+                    'https://static1.e621.net/data/sample/a4/da/a4da29755235ad720450ab87cdaecad7.jpg',
+                    'https://static1.e621.net/data/sample/8a/7d/8a7dd02398c88c6e98834ebe6a259fed.jpg',
+                    'https://static1.e621.net/data/sample/99/ba/99baef219cd9fb83c0488efe3a1a2e24.jpg',
+                    'https://static1.e621.net/data/sample/b3/35/b335dcfe12aac589e75b0f24c2fd5142.jpg',
+                    'https://static1.e621.net/data/sample/10/df/10dfcde05c98c74de3639ba1c0790521.jpg',
+                    'https://static1.e621.net/data/sample/80/b2/80b21a2e6a1a660d30d5ec4d542f5ef0.jpg',
+                    'https://static1.e621.net/data/sample/0c/0b/0c0b073dcfd2badd1424c406f8b76a20.jpg',
+                    'https://static1.e621.net/data/sample/bc/c8/bcc8ca6a236e0cda086e382f724de996.jpg',
+                    'https://static1.e621.net/data/sample/0a/15/0a15b172daa2f3b4ff32553db0973a7d.jpg',
+                    'https://static1.e621.net/data/f8/27/f827264b0235be01f37c30df0df1ffed.png'
                 ]
             }
         }
@@ -162,9 +187,37 @@ module.exports = {
                     'https://media.discordapp.net/attachments/1477571857375957064/1479965987385245861/79db80d121186755c6319f2d3cf78242.jpg?ex=69adf53b&is=69aca3bb&hm=8ecc90b8857087902d24ba74d85a2e53d02c2857a09853dc307c0969e088ba2e&=&format=webp&width=968&height=726',
                     'https://media.discordapp.net/attachments/1477571857375957064/1479965987913863309/20250911_025335.jpg?ex=69adf53b&is=69aca3bb&hm=b93f37ca0509e96ca782b53e44ee8598ce44d283a845109f01fdb7a1ec6ed609&=&format=webp&width=726&height=726',
                     'https://media.discordapp.net/attachments/1477571857375957064/1479965988286890125/4130f83dfe310a5f984d76003e7d4127.jpg?ex=69adf53c&is=69aca3bc&hm=a20bf04ee3e1002dbac1ada09e5ad816ce3d4b9f880b5aa18bc54d0542048866&=&format=webp&width=813&height=726',
-                    'https://media.discordapp.net/attachments/1477571857375957064/1479124902425530398/GS7wprNbIAMDI60.jpg?ex=69ad88e9&is=69ac3769&hm=386f88aee1eaf69fcdba365a3c909fdd36b8c7cd696c1148d58e99cc5c9c7c46&=&format=webp&width=558&height=726'
+                    'https://media.discordapp.net/attachments/1477571857375957064/1479124902425530398/GS7wprNbIAMDI60.jpg?ex=69ad88e9&is=69ac3769&hm=386f88aee1eaf69fcdba365a3c909fdd36b8c7cd696c1148d58e99cc5c9c7c46&=&format=webp&width=558&height=726',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1482207217334616135/HDIsOzLbMAAzUC8.jpg?ex=69b61c8a&is=69b4cb0a&hm=16d961a67a8f1d91612aec0e8981e4f921ca6399d313a3df5863ad739f5e9d88&=&format=webp'
                 ],
                 footer: 'Al parecer está funcionando 🐯🔥'
+            }
+        },
+        {
+            label: 'Lamer',
+            value: 'lamer',
+            embed: {
+                color: '#f97316',
+                title: '${author} le ha dado una buena lamida a ${target} 🐯',
+                description: 'vaya que ${author} tiene una buena habilidad con su boquita 🐶',
+                images: ['https://media.discordapp.net/attachments/1477571857375957064/1482207216898674718/HDIw_tabQAER1Xx.jpg?ex=69b61c8a&is=69b4cb0a&hm=ed49230c578e8fdf01762c2cee15dc3912b2b1c0e4d1e4efc3f0035ad3dbc6b6&=&format=webp',
+                    'https://static1.e621.net/data/sample/01/10/0110f13ee0a754a7a2320f96c2f1c46d.jpg',
+                    'https://static1.e621.net/data/sample/8c/66/8c66b5acfaa83cf58d896982fcf00866.jpg',
+                    'https://static1.e621.net/data/sample/4b/d5/4bd5cf3c10713c5481ba93fb8cf4a44e.jpg',
+                    'https://static1.e621.net/data/58/fe/58fe399c9d7ccb6b593c927623af23cf.png',
+                    'https://static1.e621.net/data/sample/0d/e0/0de0adb25bedbc0639899c0ad7325abc.jpg',
+                    'https://static1.e621.net/data/c2/04/c204121dda9e1c0677012c71f645f417.gif',
+                    'https://static1.e621.net/data/sample/95/1c/951cba418e1f749fed0ab89e42c021d5.jpg',
+                    'https://static1.e621.net/data/sample/8b/38/8b3805630643e2f2d82c1a004d47883e.jpg',
+                    'https://static1.e621.net/data/sample/79/19/7919a159179db6a27481b98948d7e359.jpg',
+                    'https://static1.e621.net/data/sample/c2/83/c2839e50d9e1bc402c30c4a8443dd801.jpg',
+                    'https://static1.e621.net/data/sample/be/8e/be8e291ed0e9f99fa83154e19a0c0c37.jpg',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1482217834640838656/a30db1532b5fc058a44d8e708f4f871c.jpg?ex=69b6266e&is=69b4d4ee&hm=3d51a9bf0fa3ccf1793dc65e4807228e20f4c2514ce9824de315c15c1a1821be&=&format=webp',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1482217835131437097/da53a6b5ec11d4c078e4afd699cb3f98.jpg?ex=69b6266e&is=69b4d4ee&hm=3ac26978b73afeab43df4c46d89d20d40e491ffa9813bf0147062f78151ed988&=&format=webp&width=561&height=726',
+                    'https://static1.e621.net/data/67/9b/679bda4a4ebd4dcc049ff28bc62a896c.gif',
+                    'https://static1.e621.net/data/84/bb/84bb00985d87c6351a9720ada8c6259c.gif'
+                ],
+                footer: 'Se nota que tu dueño lo disfruta 🐯🔥'
             }
         }
     ],
@@ -173,7 +226,7 @@ module.exports = {
             label: 'Abrazo',
             value: 'abrazo',
             embed: {
-                color: '#60a5fa',
+                color: '#7e0404',
                 title: 'Tu cachorrito / dueño te ha dado un abrazo 🐶🐯',
                 description: '{author} está dándole mimos intensivos a {target} 🐯🐶',
                 images: ['https://i.pinimg.com/736x/0e/f0/82/0ef082c09737eeb93e3557ff8a559c60.jpg',
@@ -183,7 +236,8 @@ module.exports = {
                     'https://i.pinimg.com/736x/19/00/1a/19001abf8ba15341158b8a25735a1176.jpg',
                     'https://i.pinimg.com/736x/43/70/3c/43703cd2be388729943f9f0370284449.jpg',
                     'https://i.pinimg.com/736x/56/0e/c8/560ec8e8a5c34fa6affc2538b172bc72.jpg',
-                    'https://i.pinimg.com/736x/b8/9b/dd/b89bddb1d36550483caf9a10641dba62.jpg'
+                    'https://i.pinimg.com/736x/b8/9b/dd/b89bddb1d36550483caf9a10641dba62.jpg',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1482207188276744282/HDMozU1bQAIvihT.jpg?ex=69b61c83&is=69b4cb03&hm=bcb6ad2357c0047333bf3ac97a0662c457697f70849ba45817acac1168e02a87&=&format=webp'
                 ],
                 footer: 'No ignores estos ojitos'
             }
@@ -192,7 +246,7 @@ module.exports = {
             label: 'Besitos',
             value: 'besitos',
             embed: {
-                color: '#60a5fa',
+                color: '#7e0404',
                 title: '{author} ha dado besitos a {target} 🐶🐯',
                 description: '{author} está dándole besitos a {target} 🐯🐶',
                 images: ['https://i.pinimg.com/736x/6e/b7/b3/6eb7b375303f9b6d57db5f6169d95658.jpg',

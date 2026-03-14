@@ -19,7 +19,8 @@ let besos = ['https://pbs.twimg.com/media/HBXsyWrWcAAegjv?format=png&name=small'
             'https://media.discordapp.net/attachments/1477571857375957064/1478268303855063160/8262b52f470a7c5faddfc4d69e30329c.jpg?ex=69a870e4&is=69a71f64&hm=5f6273b675acd37895063fad3d9609679a36c30010aa42302f65658ffe689e0a&=&format=webp&width=726&height=726',
             'https://media.discordapp.net/attachments/1477571857375957064/1478268304060842074/471b17955b9d7da820fcb1b6dc69423e.jpg?ex=69a870e4&is=69a71f64&hm=ad1d69078d86a1f385076e2df399b877b32cd1c34f36c3b7990dc64086863a55&=&format=webp',
             'https://media.discordapp.net/attachments/1477571857375957064/1480413071209140295/HCF3tLvX0AAX7L2.jpg?ex=69af959c&is=69ae441c&hm=2ad03121d026c9e4a7972703cc3dd7c969428131951c08f5396ec2f73ba859d9&=&format=webp',
-            'https://media.discordapp.net/attachments/1477571857375957064/1480413071779303445/F1vIxHaWcAArD_t.jpg?ex=69af959d&is=69ae441d&hm=a46188f3b9d6bb6e5371fa17ab953ea6626295d0ae11e075f3961fa298a10251&=&format=webp'
+            'https://media.discordapp.net/attachments/1477571857375957064/1480413071779303445/F1vIxHaWcAArD_t.jpg?ex=69af959d&is=69ae441d&hm=a46188f3b9d6bb6e5371fa17ab953ea6626295d0ae11e075f3961fa298a10251&=&format=webp',
+            'https://media.discordapp.net/attachments/1477571857375957064/1482206646980837408/HDIWzINa4AAYfPW.jpg?ex=69b61c02&is=69b4ca82&hm=3961cace59980c4218a210bf89860c268ab7ec99cc2c1147189a22580b0e551b&=&format=webp&width=622&height=830'
             ];
 
 module.exports = {

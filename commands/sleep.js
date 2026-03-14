@@ -17,7 +17,10 @@ let sueñitos = ['https://i.pinimg.com/736x/26/05/fb/2605fb43b462ce126a729e6cde5
             'https://media.discordapp.net/attachments/1477571857375957064/1480401669710938132/ef7c3eabb89ea9b83a3af32d296e19fe.jpg?ex=69af8afe&is=69ae397e&hm=58c3704ef07f5b81ed33d8486b9e9f8404e830c1cb6192709c4dd255738ec3d2&=&format=webp&width=581&height=726',
             'https://media.discordapp.net/attachments/1477571857375957064/1480401670310727801/ce188cfdde1c7820b74c8dc15316dba9.jpg?ex=69af8afe&is=69ae397e&hm=cb746d69a2a472ef471e10a4df243ddfbf97788357407850ea61bf506dbb5495&=&format=webp',
             'https://i.pinimg.com/1200x/50/63/6d/50636d221d425a94e559dbfa1eb6c207.jpg',
-            'https://media.discordapp.net/attachments/1477571857375957064/1480406434708455585/GCsf8P9WsAAVXqV.jpg?ex=69af8f6e&is=69ae3dee&hm=caf265430b7d208bccc645cb0750e9d5ce7ce8e8370a398243e15abcd0267721&=&format=webp&width=826&height=826'
+            'https://media.discordapp.net/attachments/1477571857375957064/1480406434708455585/GCsf8P9WsAAVXqV.jpg?ex=69af8f6e&is=69ae3dee&hm=caf265430b7d208bccc645cb0750e9d5ce7ce8e8370a398243e15abcd0267721&=&format=webp&width=826&height=826',
+            'https://media.discordapp.net/attachments/1477571857375957064/1481972961530482819/f937f89411dde97cb49f2dd25844793d.png?ex=69b5eb1f&is=69b4999f&hm=86a8c8cfe005534923934a95a8cdf90aa3312ab5a5388d3ad1c89a53807333a1&=&format=webp&quality=lossless&width=726&height=726',
+            'https://media.discordapp.net/attachments/1477571857375957064/1481972964030288112/db28c43a15784014a3f8f270b5a7e2c8.png?ex=69b5eb20&is=69b499a0&hm=fa53612f96184d800b3690a0832522635325a9be5821f9548dca3d84a42b9e19&=&format=webp&quality=lossless&width=606&height=726',
+            'https://media.discordapp.net/attachments/1477571857375957064/1482207188276744282/HDMozU1bQAIvihT.jpg?ex=69b61c83&is=69b4cb03&hm=bcb6ad2357c0047333bf3ac97a0662c457697f70849ba45817acac1168e02a87&=&format=webp'
             ];
 
 module.exports = {

@@ -28,7 +28,11 @@ var abrazos = ['https://pbs.twimg.com/media/HCGiHQkXQAA1_1b?format=jpg&name=larg
     'https://media.discordapp.net/attachments/1477571857375957064/1478268304060842074/471b17955b9d7da820fcb1b6dc69423e.jpg?ex=69a870e4&is=69a71f64&hm=ad1d69078d86a1f385076e2df399b877b32cd1c34f36c3b7990dc64086863a55&=&format=webp',
     'https://media.discordapp.net/attachments/1477571857375957064/1480413071485698099/HCG3WbDbYAA9iDb.jpg?ex=69af959c&is=69ae441c&hm=2cd082f3fc6802616c83391e4c55724f272a4bb97694d5ea66d7491d45bceeb7&=&format=webp',
     'https://media.discordapp.net/attachments/1477571857375957064/1480413071779303445/F1vIxHaWcAArD_t.jpg?ex=69af959d&is=69ae441d&hm=a46188f3b9d6bb6e5371fa17ab953ea6626295d0ae11e075f3961fa298a10251&=&format=webp',
-    'https://media.discordapp.net/attachments/1477571857375957064/1481071139101872198/fbe0f13c63320bc81009efd2405d68e8.jpg?ex=69b1fa7c&is=69b0a8fc&hm=b75ea6b62e4f04648c09a97e2f99e85a6ed43d1dbfd995cfed278ced926233a7&=&format=webp&width=638&height=830'
+    'https://media.discordapp.net/attachments/1477571857375957064/1481071139101872198/fbe0f13c63320bc81009efd2405d68e8.jpg?ex=69b1fa7c&is=69b0a8fc&hm=b75ea6b62e4f04648c09a97e2f99e85a6ed43d1dbfd995cfed278ced926233a7&=&format=webp&width=638&height=830',
+    'https://media.discordapp.net/attachments/1477571857375957064/1481972962042314782/202fba985051be2f2b37b30c4301da7e.png?ex=69b5eb1f&is=69b4999f&hm=582a51bb77842fba92a01d93e6c0d8b474283f16741ae026277e3e9e80438d37&=&format=webp&quality=lossless&width=726&height=726',
+    'https://media.discordapp.net/attachments/1477571857375957064/1481972961530482819/f937f89411dde97cb49f2dd25844793d.png?ex=69b5eb1f&is=69b4999f&hm=86a8c8cfe005534923934a95a8cdf90aa3312ab5a5388d3ad1c89a53807333a1&=&format=webp&quality=lossless&width=726&height=726',
+    'https://media.discordapp.net/attachments/1477571857375957064/1482207186141712454/HC8AzGDa4AAPXvq.jpg?ex=69b61c83&is=69b4cb03&hm=bc45fba1a5c77b01f593377a9154a7acd4007922f6d366c0352f90c8782cff52&=&format=webp',
+    'https://media.discordapp.net/attachments/1477571857375957064/1482207188276744282/HDMozU1bQAIvihT.jpg?ex=69b61c83&is=69b4cb03&hm=bcb6ad2357c0047333bf3ac97a0662c457697f70849ba45817acac1168e02a87&=&format=webp'
     ];
 
 module.exports = {
