@@ -104,7 +104,7 @@ module.exports = {
             value: 'provocar',
             embed: {
                 color: '#ec8829',
-                title: 'Al parecer ${author} le está dando un buen show a su cachorrito! 🐯',
+                title: 'Al parecer {author} le está dando un buen show a su cachorrito! 🐯',
                 description: 'Su mascotita debe sentirse muy feliz por ello 🐶',
                 footer: 'Que sabroso se ve 🐯🦁',
                 images: [
@@ -198,8 +198,8 @@ module.exports = {
             value: 'lamer',
             embed: {
                 color: '#f97316',
-                title: '${author} le ha dado una buena lamida a ${target} 🐯',
-                description: 'vaya que ${author} tiene una buena habilidad con su boquita 🐶',
+                title: '{author} le ha dado una buena lamida a {target} 🐯',
+                description: 'vaya que {author} tiene una buena habilidad con su boquita 🐶',
                 images: ['https://media.discordapp.net/attachments/1477571857375957064/1482207216898674718/HDIw_tabQAER1Xx.jpg?ex=69b61c8a&is=69b4cb0a&hm=ed49230c578e8fdf01762c2cee15dc3912b2b1c0e4d1e4efc3f0035ad3dbc6b6&=&format=webp',
                     'https://static1.e621.net/data/sample/01/10/0110f13ee0a754a7a2320f96c2f1c46d.jpg',
                     'https://static1.e621.net/data/sample/8c/66/8c66b5acfaa83cf58d896982fcf00866.jpg',

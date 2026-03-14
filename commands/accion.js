@@ -20,8 +20,6 @@ module.exports = {
                 .setRequired(true)
         ),
 
-    
-
     async execute(interaction) {
 
         try {
@@ -97,15 +95,21 @@ module.exports = {
 
                 const embedDescriptionTemplate = actionObject.embed?.description
                     || `${author} ha decidido **${actionObject.label}** a ${targetUser} 💕`;
+                    
+                const parseTitle = text =>
+                    text
+                        ?.replaceAll('{author}', author.username)
+                        ?.replaceAll('{target}', targetUser.username);
+
+                const parseDescription = text =>
+                    text
+                        ?.replaceAll('{author}', `${author}`)
+                        ?.replaceAll('{target}', `${targetUser}`);
 
                 const embed = new EmbedBuilder()
                     .setColor(actionObject.embed?.color || '#ff69b4')
-                    .setTitle(actionObject.embed?.title || `✨ ${actionObject.label} ✨`)
-                    .setDescription(
-                        embedDescriptionTemplate
-                            .replaceAll('{author}', `${author}`)
-                            .replaceAll('{target}', `${targetUser}`)
-                    )
+                    .setTitle(parseTitle(actionObject.embed?.title))
+                    .setDescription(parseDescription(embedDescriptionTemplate))
                     .setThumbnail(author.displayAvatarURL({ dynamic: true }))
                     .setFooter({
                         text: actionObject.embed?.footer || `Mood objetivo: ${mood}`
