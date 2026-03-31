@@ -1,5 +1,22 @@
 const moodActions = require('../data/moodActions');
 const User = require('../models/User');
+const { updateHappiness, updateStreak } = require('../utils/happiness');
+
+const actionPoints = {
+    pat: 5,
+    acurrucar: 6,
+    correa: 4,
+    lick: 5,
+    nalgada: 3,
+    provocar: 4,
+    arrodillar: 4,
+    preparar: 5,
+    lamer: 5,
+    abrazo: 5,
+    besitos: 7,
+    poema: 2,
+    atencion: 3
+};
 
 const {
     SlashCommandBuilder,
@@ -88,6 +105,10 @@ module.exports = {
                         ephemeral: true
                     });
                 }
+                if (actionPoints[selectedValue] !== undefined) {
+                    await updateHappiness(author.id, targetUser.id, actionPoints[selectedValue]);
+                    await updateStreak(author.id, targetUser.id);
+                }
 
                 const selectedImage = Array.isArray(actionObject.embed?.images) && actionObject.embed.images.length
                     ? actionObject.embed.images[Math.floor(Math.random() * actionObject.embed.images.length)]
@@ -95,7 +116,7 @@ module.exports = {
 
                 const embedDescriptionTemplate = actionObject.embed?.description
                     || `${author} ha decidido **${actionObject.label}** a ${targetUser} 💕`;
-                    
+
                 const parseTitle = text =>
                     text
                         ?.replaceAll('{author}', author.username)
@@ -135,7 +156,7 @@ module.exports = {
                     await message.edit({
                         content: "⏳ La acción expiró.",
                         components: []
-                    }).catch(() => {});
+                    }).catch(() => { });
                 }
             });
 
