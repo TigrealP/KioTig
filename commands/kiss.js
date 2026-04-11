@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { updateHappiness, updateStreak } = require('../utils/happiness');
+const { updateHappiness, updateStreak, updateMoment } = require('../utils/happiness');
 
 const NOVIO_ID = '811091271023722586';
 const TU_ID = '765660693835415552';
@@ -87,6 +87,7 @@ module.exports = {
 
         await updateHappiness(author.id, target.id, 8);
         await updateStreak(author.id, target.id);
+        await updateMoment(author.id, target.id, 'kiss');
         await interaction.reply({ embeds: [embed] });
     }
 };

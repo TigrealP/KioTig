@@ -28,12 +28,28 @@ const relationshipSchema = new mongoose.Schema({
         type: Date,
         default: null
     },
+    // 📸 Contadores de momentos
+    moments: {
+        kisses: { type: Number, default: 0 },
+        hugs: { type: Number, default: 0 },
+        sleeps: { type: Number, default: 0 },
+        fucks: { type: Number, default: 0 },
+        actions: { type: Number, default: 0 }
+    },
+    lastMoment: {
+        type: String,
+        default: null
+    },
+    lastMomentAt: {
+        type: Date,
+        default: null
+    },
     createdAt: {
         type: Date,
         default: Date.now
     }
 });
-// Esto garantiza que la COMBINACIÓN user1+user2 sea única
+
 relationshipSchema.index({ user1: 1, user2: 1 }, { unique: true });
 
 module.exports = mongoose.model('Relationship', relationshipSchema);

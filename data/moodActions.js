@@ -187,7 +187,10 @@ module.exports = {
                     'https://media.discordapp.net/attachments/1477571857375957064/1479965987913863309/20250911_025335.jpg?ex=69adf53b&is=69aca3bb&hm=b93f37ca0509e96ca782b53e44ee8598ce44d283a845109f01fdb7a1ec6ed609&=&format=webp&width=726&height=726',
                     'https://media.discordapp.net/attachments/1477571857375957064/1479965988286890125/4130f83dfe310a5f984d76003e7d4127.jpg?ex=69adf53c&is=69aca3bc&hm=a20bf04ee3e1002dbac1ada09e5ad816ce3d4b9f880b5aa18bc54d0542048866&=&format=webp&width=813&height=726',
                     'https://media.discordapp.net/attachments/1477571857375957064/1479124902425530398/GS7wprNbIAMDI60.jpg?ex=69ad88e9&is=69ac3769&hm=386f88aee1eaf69fcdba365a3c909fdd36b8c7cd696c1148d58e99cc5c9c7c46&=&format=webp&width=558&height=726',
-                    'https://media.discordapp.net/attachments/1477571857375957064/1482207217334616135/HDIsOzLbMAAzUC8.jpg?ex=69b61c8a&is=69b4cb0a&hm=16d961a67a8f1d91612aec0e8981e4f921ca6399d313a3df5863ad739f5e9d88&=&format=webp'
+                    'https://media.discordapp.net/attachments/1477571857375957064/1482207217334616135/HDIsOzLbMAAzUC8.jpg?ex=69b61c8a&is=69b4cb0a&hm=16d961a67a8f1d91612aec0e8981e4f921ca6399d313a3df5863ad739f5e9d88&=&format=webp',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1488739484928442560/HEu1xpnagAAok43.jpg?ex=69ce88f0&is=69cd3770&hm=8ecff56dd52051fa3bd803ddd98342aec4d387fb41653668cf2dcbda65630b30&=&format=webp&width=578&height=723',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1488739484194439278/HErSiSWawAAOgq3.jpg?ex=69ce88f0&is=69cd3770&hm=4c02924b583e360f13648aba3d9992e3b4de3eb0e7c9966f0db0b9358125298e&=&format=webp&width=582&height=722',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1487574988847583302/HEhQXJ8aQAASBLO.png?ex=69cee9ab&is=69cd982b&hm=b2e833406d5189969abe3bab3c87a83d7fcb8ad7e0f99d91440e0ac07d403c0e&=&format=webp&quality=lossless&width=1026&height=723'
                 ],
                 footer: 'Al parecer está funcionando 🐯🔥'
             }
@@ -214,7 +217,8 @@ module.exports = {
                     'https://media.discordapp.net/attachments/1477571857375957064/1482217834640838656/a30db1532b5fc058a44d8e708f4f871c.jpg?ex=69b6266e&is=69b4d4ee&hm=3d51a9bf0fa3ccf1793dc65e4807228e20f4c2514ce9824de315c15c1a1821be&=&format=webp',
                     'https://media.discordapp.net/attachments/1477571857375957064/1482217835131437097/da53a6b5ec11d4c078e4afd699cb3f98.jpg?ex=69b6266e&is=69b4d4ee&hm=3ac26978b73afeab43df4c46d89d20d40e491ffa9813bf0147062f78151ed988&=&format=webp&width=561&height=726',
                     'https://static1.e621.net/data/67/9b/679bda4a4ebd4dcc049ff28bc62a896c.gif',
-                    'https://static1.e621.net/data/84/bb/84bb00985d87c6351a9720ada8c6259c.gif'
+                    'https://static1.e621.net/data/84/bb/84bb00985d87c6351a9720ada8c6259c.gif',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1489047754574663840/HE1w6hKbwAE6Ddc.png?ex=69ceff49&is=69cdadc9&hm=d2f45555abb03c6f7685b3fd0f7face386737cf0d6c816b365dc29c0bcb722f9&=&format=webp&quality=lossless'
                 ],
                 footer: 'Se nota que tu dueño lo disfruta 🐯🔥'
             }

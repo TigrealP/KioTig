@@ -25,10 +25,38 @@ function happinessBar(happiness) {
 
 function streakTitle(streak) {
     if (streak >= 100) return '💎 Irrompibles';
-    if (streak >= 60)  return '🔥 Llama viva';
-    if (streak >= 30)  return '🌸 Floreciendo';
-    if (streak >= 7)   return '🌱 Brote de amor';
+    if (streak >= 60) return '🔥 Llama viva';
+    if (streak >= 30) return '🌸 Floreciendo';
+    if (streak >= 7) return '🌱 Brote de amor';
     return '🐾 Comenzando';
+}
+
+function formatMoments(moments, lastMoment, lastMomentAt) {
+
+    const lines = [];
+
+    if (moments.kisses > 0) lines.push(`🐯💋🐶 Se han besado **${moments.kisses}** veces \n ------------------ \n`);
+    if (moments.hugs > 0) lines.push(`🐯🫂🐶 Se han abrazado **${moments.hugs}** veces \n ------------------ \n`);
+    if (moments.sleeps > 0) lines.push(`🐯🌙🐶 Han dormido juntos **${moments.sleeps}** veces \n ------------------ \n`);
+    if (moments.fucks > 0) lines.push(`🐯🔥🐶 Han tenido sexo **${moments.fucks}** veces \n ------------------ \n`);
+    if (moments.actions > 0) lines.push(`🐯💕🐶 Han compartido **${moments.actions}** acciones especiales \n ------------------ \n`);
+
+    if (lines.length === 0) return '📸 Aún no tienen momentos juntos... ¡empiecen ya!';
+
+    // Tiempo desde el último momento
+    const diffMs = Date.now() - new Date(lastMomentAt).getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMins / 60);
+    const diffDays = Math.floor(diffHours / 24);
+
+    const timeAgo =
+        diffDays > 0 ? `hace ${diffDays} día(s)` :
+            diffHours > 0 ? `hace ${diffHours} hora(s)` :
+                diffMins > 0 ? `hace ${diffMins} minuto(s)` : 'hace un momento';
+
+    lines.push(`\n🎵 Último momento: ${lastMoment} ${timeAgo}`);
+
+    return lines.join('\n');
 }
 
 module.exports = {
@@ -76,12 +104,13 @@ module.exports = {
 
             const profileEmbed = new EmbedBuilder()
                 .setColor('#8b0808')
-                .setTitle('🐯🧡🐶 Perfil de pareja')
+                .setTitle('🐯🧡🐶 Mi parejita')
                 .setDescription(
                     `**${author.username}** y **${target.username}**\n\n` +
                     `💕 Juntos desde: <t:${Math.floor(existing.createdAt.getTime() / 1000)}:D>\n\n` +
                     `**Felicidad:**\n${happinessBar(existing.happiness)}\n\n` +
-                    `**Racha:** ${streakTitle(existing.streak)} — ${existing.streak} días 🔥`
+                    `**Racha:** ${streakTitle(existing.streak)} — ${existing.streak} días 🔥\n\n` +
+                    `**📸 Sus momentos:**\n${formatMoments(existing.moments, existing.lastMoment, existing.lastMomentAt)}`
                 )
                 .setThumbnail(author.displayAvatarURL({ dynamic: true }))
                 .setImage(randomImage)
@@ -159,7 +188,7 @@ module.exports = {
 
                 await i.update({ embeds: [acceptEmbed], components: [] });
 
-            // ❌ Rechazar solicitud
+                // ❌ Rechazar solicitud
             } else if (i.customId === `pareja_reject_${author.id}`) {
 
                 await Relationship.findOneAndDelete(
@@ -186,7 +215,7 @@ module.exports = {
                     content: '⏳ La solicitud expiró.',
                     embeds: [],
                     components: []
-                }).catch(() => {});
+                }).catch(() => { });
             }
         });
     }

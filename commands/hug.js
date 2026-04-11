@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { updateHappiness, updateStreak } = require('../utils/happiness');
+const { updateHappiness, updateStreak, updateMoment } = require('../utils/happiness');
 
 const NOVIO_ID = '811091271023722586';
 const TU_ID = '765660693835415552';
@@ -33,8 +33,10 @@ var abrazos = ['https://pbs.twimg.com/media/HCGiHQkXQAA1_1b?format=jpg&name=larg
     'https://media.discordapp.net/attachments/1477571857375957064/1481972962042314782/202fba985051be2f2b37b30c4301da7e.png?ex=69b5eb1f&is=69b4999f&hm=582a51bb77842fba92a01d93e6c0d8b474283f16741ae026277e3e9e80438d37&=&format=webp&quality=lossless&width=726&height=726',
     'https://media.discordapp.net/attachments/1477571857375957064/1481972961530482819/f937f89411dde97cb49f2dd25844793d.png?ex=69b5eb1f&is=69b4999f&hm=86a8c8cfe005534923934a95a8cdf90aa3312ab5a5388d3ad1c89a53807333a1&=&format=webp&quality=lossless&width=726&height=726',
     'https://media.discordapp.net/attachments/1477571857375957064/1482207186141712454/HC8AzGDa4AAPXvq.jpg?ex=69b61c83&is=69b4cb03&hm=bc45fba1a5c77b01f593377a9154a7acd4007922f6d366c0352f90c8782cff52&=&format=webp',
-    'https://media.discordapp.net/attachments/1477571857375957064/1482207188276744282/HDMozU1bQAIvihT.jpg?ex=69b61c83&is=69b4cb03&hm=bcb6ad2357c0047333bf3ac97a0662c457697f70849ba45817acac1168e02a87&=&format=webp'
-    ];
+    'https://media.discordapp.net/attachments/1477571857375957064/1482207188276744282/HDMozU1bQAIvihT.jpg?ex=69b61c83&is=69b4cb03&hm=bcb6ad2357c0047333bf3ac97a0662c457697f70849ba45817acac1168e02a87&=&format=webp',
+    'https://media.discordapp.net/attachments/1477571857375957064/1488739485918433450/HEx1GmAWIAAyIGo.jpg?ex=69ce88f0&is=69cd3770&hm=25a241d1b3f5c81fad70dda96f4f9f8f6b03a5ae79c8d5c61d86104c0fbf55c6&=&format=webp',
+    'https://media.discordapp.net/attachments/1477571857375957064/1488739485624569896/HEwsPW-bEAAOrKS.jpg?ex=69ce88f0&is=69cd3770&hm=7866ac6981574c29b287f03a843908d5d3691f358ccd97714e65bbcdeac82881&=&format=webp'
+];
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -97,6 +99,7 @@ module.exports = {
 
         await updateHappiness(author.id, target.id, 5);
         await updateStreak(author.id, target.id);
+        await updateMoment(author.id, target.id, 'hug');
         await interaction.reply({ embeds: [embed] });
     }
 };

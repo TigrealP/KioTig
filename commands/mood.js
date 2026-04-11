@@ -99,7 +99,8 @@ let sumisoMood = {
         'https://media.discordapp.net/attachments/1477571857375957064/1478251137642795089/a52014454e17a99cba35be9a04f3b313.jpg?ex=69a7b827&is=69a666a7&hm=dec916f81d59da6f2c42ba9d47009802e56516030e806587743d99030ff3e28d&=&format=webp&width=729&height=726',
         'https://media.discordapp.net/attachments/1477571857375957064/1478251138078867581/b670356fb226214e6336f3d3ad08aacd.jpg?ex=69a7b827&is=69a666a7&hm=a01820cd545a89e32e516161ffde6254c5b43ee3215446d48f3f7e7a86098ea4&=&format=webp&width=530&height=726',
         'https://static1.e621.net/data/sample/38/46/38468b95b31ad4466b6a2652c8462fb4.jpg',
-        'https://media.discordapp.net/attachments/1477571857375957064/1479124901750374581/GJqRkyUbAAAPx3B.jpg?ex=69ad88e9&is=69ac3769&hm=d421441fe6daea190bdd1149fdad3e1778daa6e6088e2d2ff6c897c3132d7395&=&format=webp'
+        'https://media.discordapp.net/attachments/1477571857375957064/1479124901750374581/GJqRkyUbAAAPx3B.jpg?ex=69ad88e9&is=69ac3769&hm=d421441fe6daea190bdd1149fdad3e1778daa6e6088e2d2ff6c897c3132d7395&=&format=webp',
+        'https://media.discordapp.net/attachments/1477571857375957064/1488739485243019458/GqB_45saAAAFY7R.jpg?ex=69ce88f0&is=69cd3770&hm=48d77ea1d55bb975091b989c90bcd218cb706ec72dbe9d751e0ab0e87cfc51c5&=&format=webp&width=542&height=723'
     ]
 };
 
