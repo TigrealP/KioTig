@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { updateStats } = require('../utils/stats');
 
 const NOVIO_ID = '811091271023722586';
 const TU_ID = '765660693835415552';
@@ -35,6 +36,11 @@ module.exports = {
         } else {
             footerText = 'Será mejor que solucionen este drama ahora! 🍎';
         }
+
+        await updateStats(author.id, author.id,
+            { afecto: -2, apego: -4 },
+            {}
+        );
 
         const embed = new EmbedBuilder()
             .setColor('#db581b')

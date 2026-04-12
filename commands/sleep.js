@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { updateHappiness, updateStreak, updateMoment } = require('../utils/happiness');
+const { updateStats } = require('../utils/stats');
 
 const NOVIO_ID = '811091271023722586';
 const TU_ID = '765660693835415552';
@@ -41,55 +42,43 @@ module.exports = {
         const target = interaction.options.getUser('usuario');
         const author = interaction.user;
 
-        // 💤 Si intenta dormir con sí mismo
         if (target.id === author.id) {
-
             if (author.id === NOVIO_ID) {
-                return interaction.reply({
-                    content: 'Estoy seguro que a tu dueño le encantaría estar en la cama contigo 🐶',
-                    ephemeral: true
-                });
+                return interaction.reply({ content: 'Estoy seguro que a tu dueño le encantaría estar en la cama contigo 🐶', ephemeral: true });
             }
-
             if (author.id === TU_ID) {
-                return interaction.reply({
-                    content: '¿Tu cachorrito es un dormilón y aún así no tienes con quien dormir? 🐯',
-                    ephemeral: true
-                });
+                return interaction.reply({ content: '¿Tu cachorrito es un dormilón y aún así no tienes con quien dormir? 🐯', ephemeral: true });
             }
-
-            return interaction.reply({
-                content: '🐶 Creo que tienes algo de esquizofrenia',
-                ephemeral: true
-            });
+            return interaction.reply({ content: '🐶 Creo que tienes algo de esquizofrenia', ephemeral: true });
         }
 
         if (target.bot) {
-            return interaction.reply({
-                content: '¿No crees que sería un poco incómodo dormir con un pedazo de ojalata? 🤖',
-                ephemeral: true
-            });
+            return interaction.reply({ content: '¿No crees que sería un poco incómodo dormir con un pedazo de ojalata? 🤖', ephemeral: true });
         }
 
-        // 💕 Crear embed
         const embed = new EmbedBuilder()
-            .setColor('#8b0808') // rojito pasión
+            .setColor('#8b0808')
             .setTitle(`${author.username} ha deseado las buenas noches a ${target.username} 🐶🦁`)
-            .setAuthor({
-                name: interaction.client.user.username,
-                iconURL: interaction.client.user.displayAvatarURL()
-            })
+            .setAuthor({ name: interaction.client.user.username, iconURL: interaction.client.user.displayAvatarURL() })
             .setThumbnail(target.displayAvatarURL({ dynamic: true }))
             .setImage(sueñitos[Math.floor(Math.random() * sueñitos.length)])
             .setDescription(`¡Es hora de dormir! 🐶`)
-            .setFooter({
-                text: 'Se ven adorables junticos! 🐯❤️🐶',
-            })
+            .setFooter({ text: 'Se ven adorables junticos! 🐯❤️🐶' })
             .setTimestamp();
 
         await updateHappiness(author.id, target.id, 6);
         await updateStreak(author.id, target.id);
         await updateMoment(author.id, target.id, 'sleep');
+
+        // 🌙 Nostalgia sube para ambos (ya lo maneja updateMoment)
+        // 🧸 Apego sube para ambos
+        // 🍖 Peso sube para ambos
+        // 🫦 Deseo baja para el target (dormir calma)
+        await updateStats(author.id, target.id,
+            { apego: 4, peso: 2 },
+            { apego: 4, peso: 2, deseo: -5 }
+        );
+
         await interaction.reply({ embeds: [embed] });
     }
 };

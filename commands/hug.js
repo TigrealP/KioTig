@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { updateHappiness, updateStreak, updateMoment } = require('../utils/happiness');
+const { updateStats } = require('../utils/stats');
 
 const NOVIO_ID = '811091271023722586';
 const TU_ID = '765660693835415552';
@@ -38,6 +39,7 @@ var abrazos = ['https://pbs.twimg.com/media/HCGiHQkXQAA1_1b?format=jpg&name=larg
     'https://media.discordapp.net/attachments/1477571857375957064/1488739485624569896/HEwsPW-bEAAOrKS.jpg?ex=69ce88f0&is=69cd3770&hm=7866ac6981574c29b287f03a843908d5d3691f358ccd97714e65bbcdeac82881&=&format=webp'
 ];
 
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('hug')
@@ -54,52 +56,41 @@ module.exports = {
         const author = interaction.user;
 
         if (target.id === author.id) {
-
             if (author.id === NOVIO_ID) {
-                return interaction.reply({
-                    content: 'Estoy seguro de que tu dueño quiere abrazarte también 🐯 Anda, búscalo.',
-                    ephemeral: true
-                });
+                return interaction.reply({ content: 'Estoy seguro de que tu dueño quiere abrazarte también 🐯 Anda, búscalo.', ephemeral: true });
             }
-
             if (author.id === TU_ID) {
-                return interaction.reply({
-                    content: 'Tu cachorrito debe estar ansiando un abrazo de tu parte 🐶 No lo hagas esperar.',
-                    ephemeral: true
-                });
+                return interaction.reply({ content: 'Tu cachorrito debe estar ansiando un abrazo de tu parte 🐶 No lo hagas esperar.', ephemeral: true });
             }
-
-            return interaction.reply({
-                content: 'No puedes abrazarte a ti mismo 🥀',
-                ephemeral: true
-            });
+            return interaction.reply({ content: 'No puedes abrazarte a ti mismo 🥀', ephemeral: true });
         }
 
         if (target.bot) {
-            return interaction.reply({
-                content: 'No pongas celoso a tu dueño... Con un bot 🤖',
-                ephemeral: true
-            });
+            return interaction.reply({ content: 'No pongas celoso a tu dueño... Con un bot 🤖', ephemeral: true });
         }
 
         const embed = new EmbedBuilder()
-            .setColor('#d13e25') // morado suave
+            .setColor('#d13e25')
             .setTitle(`${author.username} abrazó a ${target.username} 🤗`)
-            .setAuthor({
-                name: interaction.client.user.username,
-                iconURL: interaction.client.user.displayAvatarURL()
-            })
+            .setAuthor({ name: interaction.client.user.username, iconURL: interaction.client.user.displayAvatarURL() })
             .setThumbnail(target.displayAvatarURL({ dynamic: true }))
             .setImage(abrazos[Math.floor(Math.random() * abrazos.length)])
             .setDescription(`${author} le dió un abrazo a ${target}, ¡qué lindo! 🐯🐶`)
-            .setFooter({
-                text: 'Un lindo abrazo para cachorritos y dueños 🐾',
-            })
+            .setFooter({ text: 'Un lindo abrazo para cachorritos y dueños 🐾' })
             .setTimestamp();
 
         await updateHappiness(author.id, target.id, 5);
         await updateStreak(author.id, target.id);
         await updateMoment(author.id, target.id, 'hug');
+
+        // ❤️ Afecto sube para ambos
+        // 🤕 Dolor baja para el target
+        // 🧸 Apego sube para ambos
+        await updateStats(author.id, target.id,
+            { afecto: 3, apego: 3 },
+            { afecto: 3, apego: 3, dolor: -4 }
+        );
+
         await interaction.reply({ embeds: [embed] });
     }
 };

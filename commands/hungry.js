@@ -1,4 +1,5 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { updateStat } = require('../utils/stats');
 
 const NOVIO_ID = '811091271023722586';
 const TU_ID = '765660693835415552';
@@ -13,7 +14,7 @@ const shy = [
     'https://i.pinimg.com/736x/73/39/08/7339088059a377f27d1493d84a859edd.jpg',
     'https://i.pinimg.com/736x/b1/2a/63/b12a63db2a20aefb63a8718c481c8922.jpg',
     'https://i.pinimg.com/736x/29/56/4e/29564e54e46b0e82460077b496d356f9.jpg'
-    ];
+];
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -23,9 +24,7 @@ module.exports = {
     async execute(interaction) {
         const author = interaction.user;
 
-        // 🎯 Footer personalizado
         let footerText;
-
         if (author.id === NOVIO_ID) {
             footerText = `Al parecer un cachorrito está hambriento 🐶`;
         } else if (author.id === TU_ID) {
@@ -47,6 +46,37 @@ module.exports = {
             .setFooter({ text: footerText })
             .setTimestamp();
 
-        await interaction.reply({ embeds: [embed] });
+        const button = new ButtonBuilder()
+            .setCustomId('feed')
+            .setLabel('Alimentar 🍖')
+            .setStyle(ButtonStyle.Primary);
+
+        const row = new ActionRowBuilder().addComponents(button);
+
+        const message = await interaction.reply({
+            content: `${author.username} tiene hambre... ¿quién le dará de comer?`,
+            embeds: [embed],
+            components: [row]
+        });
+
+        const collector = message.createMessageComponentCollector({ time: 60000 });
+
+        collector.on('collect', async i => {
+            if (i.user.id === author.id) {
+                await i.reply({ content: 'No puedes alimentarte a ti mismo...', ephemeral: true });
+                return;
+            }
+
+            await updateStat(author.id, 'peso', 5);
+            await updateStat(i.user.id, 'afecto', 2);
+
+            await i.reply(`${i.user} le ha dado de comer a ${author.username} 🍖`);
+        });
+
+        collector.on('end', async (collected, reason) => {
+            if (reason === 'time' && collected.size === 0) {
+                await updateStat(author.id, 'peso', -3);
+            }
+        });
     }
 };

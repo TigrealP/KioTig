@@ -1,4 +1,5 @@
 const { updateHappiness, updateStreak } = require('../utils/happiness');
+const { updateStats } = require('../utils/stats');
 const Relationship = require('../models/Relationship');
 const User = require('../models/User');
 
@@ -171,6 +172,23 @@ module.exports = {
 
                     await updateHappiness(author.id, partnerId, moodPoints[selected.id]);
                     await updateStreak(author.id, partnerId);
+
+                    const moodStats = {
+                        dominante: { authorStats: { dominancia: 3 }, targetStats: { sumision: 0 } },
+                        sumiso: { authorStats: { sumision: 3 }, targetStats: { dominancia: 0 } },
+                        mimoso: { authorStats: { afecto: 4, apego: 3 }, targetStats: {} },
+                        needy: { authorStats: { apego: 5 }, targetStats: {} },
+                        celoso: { authorStats: { afecto: -3, apego: -3 }, targetStats: {} }
+                    };
+
+                    if (moodStats[selected.id] && relationship) {
+                        await updateStats(
+                            author.id,
+                            partnerId,
+                            moodStats[selected.id].authorStats,
+                            moodStats[selected.id].targetStats
+                        );
+                    }
                 }
             }
 

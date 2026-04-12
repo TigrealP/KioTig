@@ -1,7 +1,8 @@
 const Relationship = require('../models/Relationship');
+const Profile = require('../models/Profile');
+const { updateStat } = require('../utils/stats');
 
 async function updateHappiness(userId1, userId2, points) {
-
     const relationship = await Relationship.findOne({
         $or: [
             { user1: userId1, user2: userId2 },
@@ -21,7 +22,6 @@ async function updateHappiness(userId1, userId2, points) {
 }
 
 async function updateStreak(userId1, userId2) {
-
     const relationship = await Relationship.findOne({
         $or: [
             { user1: userId1, user2: userId2 },
@@ -66,16 +66,29 @@ async function updateStreak(userId1, userId2) {
                 happiness: newHappiness
             }
         );
+
+        // 💎 Lealtad sube con la racha
+        const loyaltyPoints =
+            newStreak >= 61 ? 8 :
+            newStreak >= 31 ? 6 :
+            newStreak >= 8  ? 4 : 2;
+
+        await updateStat(userId1, 'lealtad', loyaltyPoints);
+        await updateStat(userId2, 'lealtad', loyaltyPoints);
+
     } else {
+        // Racha rota — Lealtad baja
         await Relationship.findOneAndUpdate(
             { _id: relationship._id },
             { streak: 1, lastInteraction: now }
         );
+
+        await updateStat(userId1, 'lealtad', -10);
+        await updateStat(userId2, 'lealtad', -10);
     }
 }
 
 async function updateMoment(userId1, userId2, momentType) {
-
     const relationship = await Relationship.findOne({
         $or: [
             { user1: userId1, user2: userId2 },
@@ -86,7 +99,6 @@ async function updateMoment(userId1, userId2, momentType) {
 
     if (!relationship) return;
 
-    // 📸 Texto descriptivo del momento
     const momentTexts = {
         kiss:   'un beso 💋',
         hug:    'un abrazo 🤗',
@@ -95,13 +107,21 @@ async function updateMoment(userId1, userId2, momentType) {
         action: 'una acción especial 💕'
     };
 
-    // 📊 Campo a incrementar según el tipo
     const momentFields = {
         kiss:   'moments.kisses',
         hug:    'moments.hugs',
         sleep:  'moments.sleeps',
         fuck:   'moments.fucks',
         action: 'moments.actions'
+    };
+
+    // 🌙 Nostalgia sube según el tipo de momento
+    const nostalgiaPoints = {
+        kiss:   2,
+        hug:    2,
+        sleep:  3,
+        fuck:   2,
+        action: 1
     };
 
     const momentText = momentTexts[momentType];
@@ -117,6 +137,11 @@ async function updateMoment(userId1, userId2, momentType) {
             lastMomentAt: new Date()
         }
     );
+
+    // 🌙 Actualizar Nostalgia para ambos
+    const nostPoints = nostalgiaPoints[momentType] || 1;
+    await updateStat(userId1, 'nostalgia', nostPoints);
+    await updateStat(userId2, 'nostalgia', nostPoints);
 }
 
 module.exports = { updateHappiness, updateStreak, updateMoment };

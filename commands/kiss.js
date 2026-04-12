@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { updateHappiness, updateStreak, updateMoment } = require('../utils/happiness');
+const { updateStats } = require('../utils/stats');
 
 const NOVIO_ID = '811091271023722586';
 const TU_ID = '765660693835415552';
@@ -39,55 +40,41 @@ module.exports = {
         const target = interaction.options.getUser('usuario');
         const author = interaction.user;
 
-        // 💋 Si intenta besarse a sí mismo
         if (target.id === author.id) {
-
             if (author.id === NOVIO_ID) {
-                return interaction.reply({
-                    content: '¿Tu dueño no te quiere besar? 🐯 Ve y pídeselo.',
-                    ephemeral: true
-                });
+                return interaction.reply({ content: '¿Tu dueño no te quiere besar? 🐯 Ve y pídeselo.', ephemeral: true });
             }
-
             if (author.id === TU_ID) {
-                return interaction.reply({
-                    content: '¿Tu cachorrito no te quiere besar? 🐶 es mejor que lo haga si no quiere un castigo',
-                    ephemeral: true
-                });
+                return interaction.reply({ content: '¿Tu cachorrito no te quiere besar? 🐶 es mejor que lo haga si no quiere un castigo', ephemeral: true });
             }
-
-            return interaction.reply({
-                content: 'No puedes besarte a ti mismo 😳',
-                ephemeral: true
-            });
+            return interaction.reply({ content: 'No puedes besarte a ti mismo 😳', ephemeral: true });
         }
 
         if (target.bot) {
-            return interaction.reply({
-                content: 'No pongas celoso a tu dueño... Con un bot 🤖',
-                ephemeral: true
-            });
+            return interaction.reply({ content: 'No pongas celoso a tu dueño... Con un bot 🤖', ephemeral: true });
         }
 
-        // 💕 Crear embed
         const embed = new EmbedBuilder()
-            .setColor('#8b0808') // rojito pasión
+            .setColor('#8b0808')
             .setTitle(`${author.username} ha besado a ${target.username} 💋`)
-            .setAuthor({
-                name: interaction.client.user.username,
-                iconURL: interaction.client.user.displayAvatarURL()
-            })
+            .setAuthor({ name: interaction.client.user.username, iconURL: interaction.client.user.displayAvatarURL() })
             .setThumbnail(target.displayAvatarURL({ dynamic: true }))
             .setImage(besos[Math.floor(Math.random() * besos.length)])
             .setDescription(`${author.username} y ${target.username} se han dado uno hermoso beso! 🐶`)
-            .setFooter({
-                text: 'Tigre adora a su cachorrito 🐯❤️🐶',
-            })
+            .setFooter({ text: 'Tigre adora a su cachorrito 🐯❤️🐶' })
             .setTimestamp();
 
         await updateHappiness(author.id, target.id, 8);
         await updateStreak(author.id, target.id);
         await updateMoment(author.id, target.id, 'kiss');
+
+        // ❤️ Afecto sube para ambos
+        // 🤕 Dolor baja para el target (un beso cura)
+        await updateStats(author.id, target.id,
+            { afecto: 4 },
+            { afecto: 4, dolor: -3 }
+        );
+
         await interaction.reply({ embeds: [embed] });
     }
 };
