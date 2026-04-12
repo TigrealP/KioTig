@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { updateHappiness, updateStreak, updateMoment } = require('../utils/happiness');
+const { updateStats } = require('../utils/stats');
 
 const NOVIO_ID = '811091271023722586';
 const TU_ID = '765660693835415552';
@@ -40,6 +41,11 @@ module.exports = {
                     ephemeral: true
                 });
             }
+
+            await updateStats(author.id, target.id,
+                { picardía: 3, dominancia: author.id === TU_ID ? 2 : 0 },
+                { picardía: 3, deseo: 8, sumision: target.id === NOVIO_ID ? 2 : 0 }
+            );
 
             return interaction.reply({
                 content: 'No puedes hacer eso contigo mismo 🦊',
