@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { updateStat } = require('../utils/stats');
 
 const NOVIO_ID = '811091271023722586';
 const TU_ID = '765660693835415552';
@@ -15,7 +16,7 @@ const shy = [
     'https://media.discordapp.net/attachments/1477571857375957064/1484067307587244032/HDkXxlDbEAEHs4D.jpg?ex=69bce0e2&is=69bb8f62&hm=52788f32fcc4a1d2b35e058298172e15e77392a9dee71b7877e2eccc3e045dc1&=&format=webp',
     'https://media.discordapp.net/attachments/1477571857375957064/1484067306475884706/HDeMhVRWoAANt2q.jpg?ex=69bce0e2&is=69bb8f62&hm=4592666ad447df271f3a5243932f332b903b4215521d53f016f52d2b94a9630a&=&format=webp&width=613&height=726',
     'https://media.discordapp.net/attachments/1477571857375957064/1484067306123296858/HDe98m7awAAtwc2.png?ex=69bce0e2&is=69bb8f62&hm=7598b8623981178c3a56a3eedc19d2ab7a7686c0ab07e668b1932398ae582bba&=&format=webp&quality=lossless'
-    ];
+];
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -25,9 +26,7 @@ module.exports = {
     async execute(interaction) {
         const author = interaction.user;
 
-        // 🎯 Footer personalizado
         let footerText;
-
         if (author.id === NOVIO_ID) {
             footerText = `Oh, vaya, ${author.username} está haciendo una escena de nuevo! 🐶`;
         } else if (author.id === TU_ID) {
@@ -35,6 +34,9 @@ module.exports = {
         } else {
             footerText = 'Será mejor que solucionen este drama ahora! 🍎';
         }
+
+        await updateStat(author.id, 'afecto', -2);
+        await updateStat(author.id, 'apego', -4);
 
         const embed = new EmbedBuilder()
             .setColor('#db581b')

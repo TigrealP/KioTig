@@ -6,14 +6,15 @@ const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent]
+        GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildMessageReactions
+    ]
 });
 const mongoose = require('mongoose');
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('MongoDB conectado 🔥'))
     .catch(err => console.error(err));
-
 
 client.commands = new Collection();
 
@@ -24,25 +25,15 @@ for (const file of commandFiles) {
     client.commands.set(command.data.name, command);
 }
 
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+
+for (const file of eventFiles) {
+    const event = require(`./events/${file}`);
+    client.on(event.name, (...args) => event.execute(...args, client));
+}
+
 client.once('ready', () => {
     console.log(`Bot listo como ${client.user.tag}`);
-});
-
-client.on('interactionCreate', async interaction => {
-    if (!interaction.isChatInputCommand()) return;
-
-    const command = client.commands.get(interaction.commandName);
-    if (!command) return;
-
-    try {
-        await command.execute(interaction);
-    } catch (error) {
-        console.error(error);
-        await interaction.reply({
-            content: 'Hubo un error ejecutando el comando.',
-            ephemeral: true
-        });
-    }
 });
 
 client.login(process.env.TOKEN);
