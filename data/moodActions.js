@@ -83,7 +83,7 @@ module.exports = {
             }
         },
         {
-            label: 'nalguear',
+            label: 'Nalguear',
             value: 'nalgada',
             embed: {
                 color: '#ec8829',
@@ -100,7 +100,7 @@ module.exports = {
             }
         },
         {
-            label: 'provocacion',
+            label: 'Provocación',
             value: 'provocar',
             embed: {
                 color: '#ec8829',
@@ -170,7 +170,7 @@ module.exports = {
         },
         {
             label: 'Provocación',
-            value: 'provocar',
+            value: 'provocar_dom',
             embed: {
                 color: '#f97316',
                 title: '{author} provoca a {target} con intención maliciosa 🐯',
@@ -183,7 +183,7 @@ module.exports = {
                     'https://static1.e621.net/data/sample/1c/f8/1cf84641e2a34fbd8488459cdef97af9.jpg',
                     'https://static1.e621.net/data/sample/ad/43/ad4397fab177dfdd45b4d170890e3618.jpg',
                     'https://static1.e621.net/data/sample/0d/24/0d24c20e649e56f0f60f53c0a7c18400.jpg',
-                    'https://media.discordapp.net/attachments/1477571857375957064/1479965987385245861/79db80d121186755c6319f2d3cf78242.jpg?ex=69adf53b&is=69aca3bb&hm=8ecc90b8857087902d24ba74d85a2e53d02c2857a09853dc307c0969e088ba2e&=&format=webp&width=968&height=726',
+                    'https://media.discordapp.net/attachments/1477571857375957064/1479965987385245861/79db80d121186755c6319f2d3cf78242.jpg?ex=69adf53b&is=69aca3bb&hm=b93f37ca0509e96ca782b53e44ee8598ce44d283a845109f01fdb7a1ec6ed609&=&format=webp&width=968&height=726',
                     'https://media.discordapp.net/attachments/1477571857375957064/1479965987913863309/20250911_025335.jpg?ex=69adf53b&is=69aca3bb&hm=b93f37ca0509e96ca782b53e44ee8598ce44d283a845109f01fdb7a1ec6ed609&=&format=webp&width=726&height=726',
                     'https://media.discordapp.net/attachments/1477571857375957064/1479965988286890125/4130f83dfe310a5f984d76003e7d4127.jpg?ex=69adf53c&is=69aca3bc&hm=a20bf04ee3e1002dbac1ada09e5ad816ce3d4b9f880b5aa18bc54d0542048866&=&format=webp&width=813&height=726',
                     'https://media.discordapp.net/attachments/1477571857375957064/1479124902425530398/GS7wprNbIAMDI60.jpg?ex=69ad88e9&is=69ac3769&hm=386f88aee1eaf69fcdba365a3c909fdd36b8c7cd696c1148d58e99cc5c9c7c46&=&format=webp&width=558&height=726',
@@ -276,7 +276,7 @@ module.exports = {
             }
         },
         {
-            label: 'Atencion',
+            label: 'Atención',
             value: 'atencion',
             embed: {
                 color: '#580101',
@@ -284,7 +284,8 @@ module.exports = {
                 description: '{author} se ha dado cuenta de que no ha estado tan atento como debería con {target}, y se compromete a mejorar y darle toda la atención que merece 🐶🐯',
                 images: ['https://i.pinimg.com/736x/03/11/50/031150adbc219280fd4d46b3b0521017.jpg',
                     'https://i.pinimg.com/736x/90/7b/fe/907bfe980d2d825e3bcd7b3ed046dbcc.jpg',
-                    'https://i.pinimg.com/736x/b8/e5/58/b8e558ba42bfe7f416c692e5dbd82159.jpg',],
+                    'https://i.pinimg.com/736x/b8/e5/58/b8e558ba42bfe7f416c692e5dbd82159.jpg'
+                ],
                 footer: 'Alguien está sintiendo celos, pero de una forma muy tierna 🐶🐯🥂'
             }
         }

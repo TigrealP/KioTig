@@ -45,10 +45,16 @@ function createProfileEmbed(profile, targetUser, moodLabel, isOwn, isPartner, is
         : null;
 
     const footerText = [targetUser.username, createdAt].filter(Boolean).join('  •  ');
+<<<<<<< HEAD
 
     const separator = '`─────────────────`';
 
     const descLines = [];
+=======
+    const separator = '`─────────────────`';
+    const descLines = [];
+
+>>>>>>> develop
     descLines.push(`**•** ${profile.description || '*Sin descripción.*'}`);
     descLines.push('');
 
@@ -78,11 +84,18 @@ function createProfileEmbed(profile, targetUser, moodLabel, isOwn, isPartner, is
     return embed;
 }
 
+<<<<<<< HEAD
 function createButtons(isOwn, isPartner, isPublic) {
     const components = [];
 
     if (isOwn) {
         // Propio perfil
+=======
+function createButtons(isOwn, isPartnerRelation, isPublic) {
+    const components = [];
+
+    if (isOwn) {
+>>>>>>> develop
         components.push(
             new ActionRowBuilder().addComponents(
                 new ButtonBuilder()
@@ -103,8 +116,12 @@ function createButtons(isOwn, isPartner, isPublic) {
                     .setStyle(ButtonStyle.Danger)
             )
         );
+<<<<<<< HEAD
     } else if (isPartner) {
         // Perfil de pareja
+=======
+    } else if (isPartnerRelation) {
+>>>>>>> develop
         components.push(
             new ActionRowBuilder().addComponents(
                 new ButtonBuilder()
@@ -122,7 +139,10 @@ function createButtons(isOwn, isPartner, isPublic) {
             )
         );
     } else if (isPublic) {
+<<<<<<< HEAD
         // Perfil público de otro
+=======
+>>>>>>> develop
         components.push(
             new ActionRowBuilder().addComponents(
                 new ButtonBuilder()
@@ -136,7 +156,10 @@ function createButtons(isOwn, isPartner, isPublic) {
             )
         );
     }
+<<<<<<< HEAD
     // Si privado y no propio ni pareja, no hay botones
+=======
+>>>>>>> develop
 
     return components;
 }
@@ -162,12 +185,18 @@ module.exports = {
             const isPartnerRelation = await isPartner(author.id, targetUser.id);
             const isPublic = profile?.isPublic || false;
 
+<<<<<<< HEAD
             // Obtener mood
+=======
+>>>>>>> develop
             const userData = await User.findOne({ userId: targetUser.id });
             const moodLabel = userData?.currentMood?.name ? MOOD_LABELS[userData.currentMood.name] : null;
 
             if (!profile) {
+<<<<<<< HEAD
                 // CASO A: Sin perfil
+=======
+>>>>>>> develop
                 const embed = new EmbedBuilder()
                     .setColor('#8b0808')
                     .setTitle('🐾 Sin perfil aún')
@@ -194,7 +223,10 @@ module.exports = {
 
                     collector.on('collect', async i => {
                         if (i.customId === 'create_profile') {
+<<<<<<< HEAD
                             // Modal para texto
+=======
+>>>>>>> develop
                             const modal = new ModalBuilder()
                                 .setCustomId('create_profile_modal')
                                 .setTitle('Crear perfil 🐾');
@@ -213,7 +245,11 @@ module.exports = {
                                         .setLabel('Descripción')
                                         .setStyle(TextInputStyle.Paragraph)
                                         .setRequired(true)
+<<<<<<< HEAD
                                     )
+=======
+                                )
+>>>>>>> develop
                             );
 
                             await i.showModal(modal);
@@ -228,7 +264,10 @@ module.exports = {
                             const characterName = modalSubmit.fields.getTextInputValue('characterName');
                             const description = modalSubmit.fields.getTextInputValue('description');
 
+<<<<<<< HEAD
                             // Crear perfil básico
+=======
+>>>>>>> develop
                             const newProfile = new Profile({
                                 userId: author.id,
                                 characterName,
@@ -237,7 +276,10 @@ module.exports = {
                             });
                             await newProfile.save();
 
+<<<<<<< HEAD
                             // Selección de stats
+=======
+>>>>>>> develop
                             const availableStats = getAvailableStats(author.id);
                             const statOptions = availableStats.map(stat => ({
                                 label: stat.charAt(0).toUpperCase() + stat.slice(1),
@@ -258,7 +300,13 @@ module.exports = {
                                 ephemeral: true
                             });
 
+<<<<<<< HEAD
                             const statResponse = await modalSubmit.awaitMessageComponent({
+=======
+                            const statMsg = await modalSubmit.fetchReply();
+
+                            const statResponse = await statMsg.awaitMessageComponent({
+>>>>>>> develop
                                 componentType: ComponentType.StringSelect,
                                 time: 120000,
                                 filter: k => k.user.id === author.id
@@ -269,6 +317,7 @@ module.exports = {
                             const selectedStats = statResponse.values;
                             await unlockStats(author.id, selectedStats);
 
+<<<<<<< HEAD
                             // Mostrar perfil creado
                             const createdProfile = await Profile.findOne({ userId: author.id });
                             const embed = createProfileEmbed(createdProfile, author, moodLabel, true, false, false);
@@ -279,6 +328,16 @@ module.exports = {
                                 embeds: [embed],
                                 components,
                                 ephemeral: true
+=======
+                            const createdProfile = await Profile.findOne({ userId: author.id });
+                            const createdEmbed = createProfileEmbed(createdProfile, author, moodLabel, true, false, false);
+                            const createdComponents = createButtons(true, false, false);
+
+                            await statResponse.update({
+                                content: '✅ ¡Perfil creado exitosamente!',
+                                embeds: [createdEmbed],
+                                components: createdComponents
+>>>>>>> develop
                             });
                         }
                     });
@@ -286,7 +345,10 @@ module.exports = {
                 return;
             }
 
+<<<<<<< HEAD
             // CASOS B-E: Con perfil
+=======
+>>>>>>> develop
             const embed = createProfileEmbed(profile, targetUser, moodLabel, isOwn, isPartnerRelation, isPublic);
             const components = createButtons(isOwn, isPartnerRelation, isPublic);
 
@@ -303,6 +365,11 @@ module.exports = {
                     const targetId = targetUser.id;
 
                     if (i.customId === 'edit_texto') {
+<<<<<<< HEAD
+=======
+                        const currentProfile = await Profile.findOne({ userId: targetId });
+
+>>>>>>> develop
                         const modal = new ModalBuilder()
                             .setCustomId('edit_texto_modal')
                             .setTitle('Editar texto 📝');
@@ -314,7 +381,7 @@ module.exports = {
                                     .setLabel('Nombre del personaje')
                                     .setStyle(TextInputStyle.Short)
                                     .setRequired(true)
-                                    .setValue(profile.characterName || '')
+                                    .setValue(currentProfile.characterName || '')
                             ),
                             new ActionRowBuilder().addComponents(
                                 new TextInputBuilder()
@@ -322,7 +389,7 @@ module.exports = {
                                     .setLabel('Descripción')
                                     .setStyle(TextInputStyle.Paragraph)
                                     .setRequired(true)
-                                    .setValue(profile.description || '')
+                                    .setValue(currentProfile.description || '')
                             )
                         );
 
@@ -404,7 +471,13 @@ module.exports = {
                             ephemeral: true
                         });
 
+<<<<<<< HEAD
                         const statResponse = await i.awaitMessageComponent({
+=======
+                        const statMsg = await i.fetchReply();
+
+                        const statResponse = await statMsg.awaitMessageComponent({
+>>>>>>> develop
                             componentType: ComponentType.StringSelect,
                             time: 120000,
                             filter: k => k.user.id === author.id
@@ -412,6 +485,7 @@ module.exports = {
 
                         if (!statResponse) return;
 
+<<<<<<< HEAD
                         const selectedStats = statResponse.values;
                         await unlockStats(targetId, selectedStats);
 
@@ -422,12 +496,28 @@ module.exports = {
 
                     } else if (i.customId === 'toggle_privacy') {
                         const newPublic = !profile.isPublic;
+=======
+                        await unlockStats(targetId, statResponse.values);
+
+                        await statResponse.update({
+                            content: '✅ Stats actualizados!',
+                            components: []
+                        });
+
+                    } else if (i.customId === 'toggle_privacy') {
+                        const freshProfile = await Profile.findOne({ userId: targetId });
+                        const newPublic = !freshProfile.isPublic;
+
+>>>>>>> develop
                         await Profile.findOneAndUpdate(
                             { userId: targetId },
                             { isPublic: newPublic, updatedAt: new Date() }
                         );
 
+<<<<<<< HEAD
                         // Editar el mensaje original
+=======
+>>>>>>> develop
                         const updatedProfile = await Profile.findOne({ userId: targetId });
                         const updatedEmbed = createProfileEmbed(updatedProfile, targetUser, moodLabel, true, false, newPublic);
                         const updatedComponents = createButtons(true, false, newPublic);
@@ -435,7 +525,11 @@ module.exports = {
                         await message.edit({ embeds: [updatedEmbed], components: updatedComponents });
 
                         await i.reply({
+<<<<<<< HEAD
                             content: `✅ Perfil ahora es ${newPublic ? 'público' : 'privado'}.`,
+=======
+                            content: `✅ Perfil ahora es ${newPublic ? 'público 🌐' : 'privado 🔒'}.`,
+>>>>>>> develop
                             ephemeral: true
                         });
                     }

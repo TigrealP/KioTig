@@ -10,6 +10,7 @@ const actionPoints = {
     lick: 5,
     nalgada: 3,
     provocar: 4,
+    provocar_dom: 4,
     arrodillar: 4,
     preparar: 5,
     lamer: 5,
@@ -17,6 +18,23 @@ const actionPoints = {
     besitos: 7,
     poema: 2,
     atencion: 3
+};
+
+const actionStats = {
+    pat:         { authorStats: { afecto: 3 },                          targetStats: { afecto: 3 } },
+    acurrucar:   { authorStats: { afecto: 3, apego: 4 },                targetStats: { afecto: 3, apego: 4 } },
+    correa:      { authorStats: { picardía: 3, dominancia: 3 },         targetStats: { sumision: 2, control: 6, dolor: 3, deseo: 4 } },
+    lick:        { authorStats: { picardía: 3 },                        targetStats: { deseo: 5 } },
+    nalgada:     { authorStats: { picardía: 3, dominancia: 2 },         targetStats: { dolor: 5, deseo: 4 } },
+    provocar:    { authorStats: { picardía: 3 },                        targetStats: { deseo: 6 } },
+    provocar_dom:{ authorStats: { picardía: 3, dominancia: 2 },         targetStats: { deseo: 6, control: 3 } },
+    arrodillar:  { authorStats: { picardía: 3, sumision: 3 },           targetStats: { dominancia: 3, control: 5 } },
+    preparar:    { authorStats: { picardía: 3, sumision: 2 },           targetStats: { dominancia: 2, control: 4, deseo: 5 } },
+    lamer:       { authorStats: { picardía: 3 },                        targetStats: { deseo: 5, dominancia: 2 } },
+    abrazo:      { authorStats: { afecto: 3, apego: 3 },                targetStats: { afecto: 3, apego: 3, dolor: -5 } },
+    besitos:     { authorStats: { afecto: 4 },                          targetStats: { afecto: 4, dolor: -4, deseo: 3 } },
+    poema:       { authorStats: { afecto: 4 },                          targetStats: { afecto: 4 } },
+    atencion:    { authorStats: { afecto: 3 },                          targetStats: { afecto: 3 } }
 };
 
 const {
@@ -37,26 +55,22 @@ module.exports = {
         ),
 
     async execute(interaction) {
-
         try {
-
             const author = interaction.user;
             const targetUser = interaction.options.getUser('usuario');
 
-            // ❌ Evitar acciones a uno mismo
             if (author.id === targetUser.id) {
                 return interaction.reply({
-                    content: "Sé como te sientes... Pero para ello tienes a tu parejita 🐶🐯",
+                    content: 'Sé como te sientes... Pero para ello tienes a tu parejita 🐶🐯',
                     ephemeral: true
                 });
             }
 
-            // 🔎 Buscar mood en la DB
             const targetData = await User.findOne({ userId: targetUser.id });
 
             if (!targetData || !targetData.currentMood) {
                 return interaction.reply({
-                    content: "El usuario no tiene un mood activo. No puedes realizar acciones. 🐶🐯",
+                    content: 'El usuario no tiene un mood activo. No puedes realizar acciones. 🐶🐯',
                     ephemeral: true
                 });
             }
@@ -66,12 +80,11 @@ module.exports = {
 
             if (!actions || actions.length === 0) {
                 return interaction.reply({
-                    content: "No hay acciones configuradas para ese mood.",
+                    content: 'No hay acciones configuradas para ese mood.',
                     ephemeral: true
                 });
             }
 
-            // 🎯 Crear menú dinámico
             const menu = new StringSelectMenuBuilder()
                 .setCustomId(`accion_${targetUser.id}`)
                 .setPlaceholder(`Acciones disponibles (${mood})`)
@@ -85,7 +98,6 @@ module.exports = {
                 fetchReply: true
             });
 
-            // 🧠 Collector ligado SOLO a este mensaje
             const collector = message.createMessageComponentCollector({
                 filter: i =>
                     i.user.id === author.id &&
@@ -94,25 +106,23 @@ module.exports = {
             });
 
             collector.on('collect', async i => {
-
                 const selectedValue = i.values[0];
                 const actionObject = actions.find(a => a.value === selectedValue);
 
-                // ✅ Validar primero
                 if (!actionObject) {
                     return i.reply({
-                        content: "Acción inválida.",
+                        content: 'Acción inválida.',
                         ephemeral: true
                     });
                 }
 
-                // 📊 Actualizar felicidad, racha y momento
                 if (actionPoints[selectedValue] !== undefined) {
                     await updateHappiness(author.id, targetUser.id, actionPoints[selectedValue]);
                     await updateStreak(author.id, targetUser.id);
                     await updateMoment(author.id, targetUser.id, 'action');
                 }
 
+<<<<<<< HEAD
                 const actionStats = {
                     // Mood mimoso
                     pat: { authorStats: { afecto: 3 }, targetStats: { afecto: 3 } },
@@ -134,6 +144,8 @@ module.exports = {
                     atencion: { authorStats: { afecto: 3 }, targetStats: { afecto: 3 } }
                 };
 
+=======
+>>>>>>> develop
                 if (actionStats[selectedValue]) {
                     await updateStats(
                         author.id,
@@ -183,22 +195,20 @@ module.exports = {
                 collector.stop();
             });
 
-            // ⏳ Si nadie selecciona nada
             collector.on('end', async (_, reason) => {
                 if (reason === 'time') {
                     await message.edit({
-                        content: "⏳ La acción expiró.",
+                        content: '⏳ La acción expiró.',
                         components: []
                     }).catch(() => { });
                 }
             });
 
         } catch (error) {
-            console.error("Error en /accion:", error);
-
+            console.error('Error en /accion:', error);
             if (!interaction.replied) {
                 await interaction.reply({
-                    content: "Ocurrió un error al ejecutar el comando.",
+                    content: 'Ocurrió un error al ejecutar el comando.',
                     ephemeral: true
                 });
             }
