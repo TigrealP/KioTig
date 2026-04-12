@@ -1,4 +1,4 @@
-const Relationship = require('../models/relationship');
+const Relationship = require('../models/Relationship');
 
 async function updateHappiness(userId1, userId2, points) {
 

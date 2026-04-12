@@ -44,7 +44,7 @@ module.exports = {
         // 💤 Si intenta dormir con sí mismo
         if (target.id === author.id) {
 
-            if (author.id === CACHORRITO_ID) {
+            if (author.id === NOVIO_ID) {
                 return interaction.reply({
                     content: 'Estoy seguro que a tu dueño le encantaría estar en la cama contigo 🐶',
                     ephemeral: true
