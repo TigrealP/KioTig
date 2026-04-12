@@ -1,5 +1,5 @@
 const { updateHappiness, updateStreak } = require('../utils/happiness');
-const Relationship = require('../models/relationship');
+const Relationship = require('../models/Relationship');
 const User = require('../models/User');
 
 const {

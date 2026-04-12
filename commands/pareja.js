@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const Relationship = require('../models/relationship');
+const Relationship = require('../models/Relationship');
 
 const NOVIO_ID = '811091271023722586';
 const TU_ID = '765660693835415552';

@@ -75,9 +75,9 @@ module.exports = {
             })
             .setTimestamp();
 
-        await updateHappiness(author.id, target.id, 8);
+        await updateHappiness(author.id, target.id, -2);
         await updateStreak(author.id, target.id);
-        await updateMoment(author.id, target.id, 'splash');
+        await updateMoment(author.id, target.id, 'action');
         await interaction.reply({ embeds: [embed] });
     }
 };
