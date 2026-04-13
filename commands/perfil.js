@@ -1,17 +1,11 @@
-const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, StringSelectMenuBuilder, ComponentType } = require('discord.js');
+const { unlockStats, formatStats, FIXED_STATS, BLOCKED_STATS } = require('../utils/stats');
 const Profile = require('../models/Profile');
 const Relationship = require('../models/Relationship');
 const User = require('../models/User');
-const { formatStats } = require('../utils/stats');
 
 const NOVIO_ID = '811091271023722586';
 const TU_ID = '765660693835415552';
-
-function getRoleIcon(userId) {
-    if (userId === TU_ID) return '🐯';
-    if (userId === NOVIO_ID) return '🐶';
-    return '🦊';
-}
 
 const MOOD_LABELS = {
     mimoso:    'Mimoso 🐯🧡🐶',
@@ -20,6 +14,141 @@ const MOOD_LABELS = {
     dominante: 'Dominante 🐯',
     sumiso:    'Sumiso 🐶'
 };
+
+
+async function isPartner(authorId, targetId) {
+    const relationship = await Relationship.findOne({
+        $or: [
+            { user1: authorId, user2: targetId },
+            { user1: targetId, user2: authorId }
+        ],
+        status: 'accepted'
+    });
+    return !!relationship;
+}
+
+function getAvailableStats(userId) {
+    const allStats = ['dominancia', 'sumision', 'afecto', 'picardía', 'lealtad', 'nostalgia', 'peso', 'deseo', 'dolor', 'control', 'apego'];
+    const fixed = FIXED_STATS[userId];
+    const blocked = BLOCKED_STATS[userId];
+    return allStats.filter(stat => stat !== fixed && stat !== blocked);
+}
+
+function createProfileEmbed(profile, targetUser, moodLabel) {
+    const createdAt = profile.createdAt
+        ? `Perfil creado el ${profile.createdAt.toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' })}`
+        : null;
+
+    const footerText = [targetUser.username, createdAt].filter(Boolean).join('  •  ');
+
+    const separator = '`─────────────────`';
+    const descLines = [];
+
+    descLines.push(`**•** ${profile.description || '*Sin descripción.*'}`);
+    descLines.push('');
+
+    if (moodLabel) {
+        descLines.push(`**•** Estado actual: ${moodLabel}`);
+        descLines.push('');
+    }
+
+    const hasStats = profile.stats && Object.values(profile.stats).some(s => s.unlocked);
+    if (hasStats) {
+        descLines.push(separator);
+        descLines.push('**📊 Stats:**');
+        descLines.push(formatStats(profile.stats));
+        descLines.push(separator);
+    }
+
+    const embed = new EmbedBuilder()
+        .setColor('#8b0808')
+        .setTitle(`${profile.characterName || targetUser.username}`)
+        .setDescription(descLines.join('\n'))
+        .setThumbnail(targetUser.displayAvatarURL({ dynamic: true }))
+        .setFooter({ text: footerText, iconURL: targetUser.displayAvatarURL() })
+        .setTimestamp();
+
+    if (profile.image) embed.setImage(profile.image);
+
+    return embed;
+}
+
+
+function createButtons({ isOwn, isPartnerRelation, isPublic, isPostCreation = false }) {
+    const components = [];
+
+    if (isPostCreation) {
+        components.push(
+            new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                    .setCustomId('edit_imagen')
+                    .setLabel('Editar imagen 🖼️')
+                    .setStyle(ButtonStyle.Secondary),
+                new ButtonBuilder()
+                    .setCustomId('edit_stats')
+                    .setLabel('Editar stats 🎲')
+                    .setStyle(ButtonStyle.Success)
+            )
+        );
+        return components;
+    }
+
+    if (isOwn) {
+        components.push(
+            new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                    .setCustomId('edit_texto')
+                    .setLabel('Editar texto 📝')
+                    .setStyle(ButtonStyle.Primary),
+                new ButtonBuilder()
+                    .setCustomId('edit_imagen')
+                    .setLabel('Editar imagen 🖼️')
+                    .setStyle(ButtonStyle.Secondary),
+                new ButtonBuilder()
+                    .setCustomId('edit_stats')
+                    .setLabel('Editar stats 🎲')
+                    .setStyle(ButtonStyle.Success),
+                new ButtonBuilder()
+                    .setCustomId('toggle_privacy')
+                    .setLabel(isPublic ? '🌐 Público' : '🔒 Privado')
+                    .setStyle(ButtonStyle.Danger)
+            )
+        );
+
+    } else if (isPartnerRelation) {
+        components.push(
+            new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                    .setCustomId('edit_texto')
+                    .setLabel('Editar texto 📝')
+                    .setStyle(ButtonStyle.Primary),
+                new ButtonBuilder()
+                    .setCustomId('edit_imagen')
+                    .setLabel('Editar imagen 🖼️')
+                    .setStyle(ButtonStyle.Secondary),
+                new ButtonBuilder()
+                    .setCustomId('edit_stats')
+                    .setLabel('Editar stats 🎲')
+                    .setStyle(ButtonStyle.Success)
+            )
+        );
+    } else if (isPublic) {
+        components.push(
+            new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                    .setCustomId('edit_texto')
+                    .setLabel('Editar texto 📝')
+                    .setStyle(ButtonStyle.Primary),
+                new ButtonBuilder()
+                    .setCustomId('edit_imagen')
+                    .setLabel('Editar imagen 🖼️')
+                    .setStyle(ButtonStyle.Secondary)
+            )
+        );
+    }
+
+    return components;
+}
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -38,101 +167,165 @@ module.exports = {
             const targetUser = interaction.options.getUser('usuario') || author;
 
             const profile = await Profile.findOne({ userId: targetUser.id });
+            const isOwn = targetUser.id === author.id;
+            const isPartnerRelation = await isPartner(author.id, targetUser.id);
+            const isPublic = profile?.isPublic || false;
+
+
+            const userData = await User.findOne({ userId: targetUser.id });
+            const moodLabel = userData?.currentMood?.name ? MOOD_LABELS[userData.currentMood.name] : null;
 
             if (!profile) {
-                return interaction.reply({
-                    content: targetUser.id === author.id
-                        ? 'No has creado un perfil aún. Usa `/editar-perfil texto` para crear uno 🐾'
-                        : `${targetUser.username} no tiene un perfil creado aún. 🐯🐶`,
-                    ephemeral: true
-                });
-            }
 
-            // 🌙 Mood actual
-            const userData = await User.findOne({ userId: targetUser.id });
-            const moodLabel = userData?.currentMood?.name
-                ? MOOD_LABELS[userData.currentMood.name]
-                : null;
+                const embed = new EmbedBuilder()
+                    .setColor('#8b0808')
+                    .setTitle('🐾 Sin perfil aún')
+                    .setDescription(isOwn ? 'Aún no tienes perfil, ¡crea uno!' : 'Este usuario aún no tiene perfil creado.')
+                    .setThumbnail(targetUser.displayAvatarURL({ dynamic: true }));
 
-            // 📅 Footer
-            const createdAt = profile.createdAt
-                ? `Perfil creado el ${profile.createdAt.toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' })}`
-                : null;
-
-            const footerText = [targetUser.username, createdAt].filter(Boolean).join('  •  ');
-
-            // 📊 Stats (antes de construir la descripción)
-            const hasStats = profile.stats &&
-                Object.values(profile.stats).some(s => s.unlocked);
-
-            // 🎨 Descripción estilizada
-            const separator = '`─────────────────`';
-
-            const descLines = [];
-
-            descLines.push(`**•** ${profile.description || '*Sin descripción.*'}`);
-            descLines.push('');
-
-            if (moodLabel) {
-                descLines.push(`**•** Estado actual: ${moodLabel}`);
-                descLines.push('');
-            }
-
-            if (hasStats) {
-                descLines.push(separator);
-                descLines.push('**📊 Stats:**');
-                descLines.push(formatStats(profile.stats));
-                descLines.push(separator);
-            }
-
-            const embed = new EmbedBuilder()
-                .setColor('#8b0808')
-                .setTitle(`🐾 Perfil de ${profile.characterName || targetUser.username}`)
-                .setDescription(descLines.join('\n'))
-                .setThumbnail(targetUser.displayAvatarURL({ dynamic: true }))
-                .setFooter({ text: footerText, iconURL: interaction.client.user.displayAvatarURL() })
-                .setTimestamp();
-
-            if (profile.image) embed.setImage(profile.image);
-
-            // ─── Botones editar (solo si es el perfil de otro) ───────────────
-            const components = [];
-
-            if (targetUser.id !== author.id) {
-                components.push(
+                const components = isOwn ? [
                     new ActionRowBuilder().addComponents(
                         new ButtonBuilder()
-                            .setCustomId(`edit_partner_texto_${targetUser.id}`)
-                            .setLabel('Editar texto 📝')
-                            .setStyle(ButtonStyle.Primary),
-                        new ButtonBuilder()
-                            .setCustomId(`edit_partner_imagen_${targetUser.id}`)
-                            .setLabel('Editar imagen 🖼️')
-                            .setStyle(ButtonStyle.Secondary)
+                            .setCustomId('create_profile')
+                            .setLabel('Crear perfil 🐾')
+                            .setStyle(ButtonStyle.Success)
                     )
-                );
+                ] : [];
+
+                await interaction.reply({ embeds: [embed], components, ephemeral: !isOwn });
+
+                if (isOwn) {
+                    const message = await interaction.fetchReply();
+                    const collector = message.createMessageComponentCollector({
+                        filter: i => i.user.id === author.id,
+                        time: 120000
+                    });
+
+                    collector.on('collect', async i => {
+                        if (i.customId === 'create_profile') {
+
+                            const modal = new ModalBuilder()
+                                .setCustomId('create_profile_modal')
+                                .setTitle('Crear perfil 🐾');
+
+                            modal.addComponents(
+                                new ActionRowBuilder().addComponents(
+                                    new TextInputBuilder()
+                                        .setCustomId('characterName')
+                                        .setLabel('Nombre del personaje')
+                                        .setStyle(TextInputStyle.Short)
+                                        .setRequired(true)
+                                ),
+                                new ActionRowBuilder().addComponents(
+                                    new TextInputBuilder()
+                                        .setCustomId('description')
+                                        .setLabel('Descripción')
+                                        .setStyle(TextInputStyle.Paragraph)
+                                        .setRequired(true)
+
+                                )
+                            );
+
+                            await i.showModal(modal);
+
+                            const modalSubmit = await i.awaitModalSubmit({
+                                time: 120000,
+                                filter: j => j.user.id === author.id
+                            }).catch(() => null);
+
+                            if (!modalSubmit) return;
+
+                            const characterName = modalSubmit.fields.getTextInputValue('characterName');
+                            const description = modalSubmit.fields.getTextInputValue('description');
+
+
+                            const newProfile = new Profile({
+                                userId: author.id,
+                                characterName,
+                                description,
+                                isPublic: false
+                            });
+                            await newProfile.save();
+
+
+                            const availableStats = getAvailableStats(author.id);
+                            const statOptions = availableStats.map(stat => ({
+                                label: stat.charAt(0).toUpperCase() + stat.slice(1),
+                                value: stat,
+                                description: `Desbloquear ${stat}`
+                            }));
+
+                            const statSelect = new StringSelectMenuBuilder()
+                                .setCustomId('select_stats')
+                                .setPlaceholder('Elige 4 stats (mínimo 4, máximo 4)')
+                                .setMinValues(4)
+                                .setMaxValues(4)
+                                .addOptions(statOptions);
+
+                            await modalSubmit.reply({
+                                content: '🎲 Selecciona tus 4 stats iniciales:',
+                                components: [new ActionRowBuilder().addComponents(statSelect)],
+                                ephemeral: true
+                            });
+
+
+                            const statMsg = await modalSubmit.fetchReply();
+
+                            const statResponse = await statMsg.awaitMessageComponent({
+                                componentType: ComponentType.StringSelect,
+                                time: 120000,
+                                filter: k => k.user.id === author.id
+                            }).catch(() => null);
+
+                            if (!statResponse) return;
+
+                            const selectedStats = statResponse.values;
+                            await unlockStats(author.id, selectedStats);
+
+
+                            const createdProfile = await Profile.findOne({ userId: author.id });
+                            const createdEmbed = createProfileEmbed(createdProfile, author, moodLabel);
+                            const createdComponents = createButtons({
+                                isOwn: true,
+                                isPartnerRelation: false,
+                                isPublic: false,
+                                isPostCreation: true
+                            });
+
+                            await statResponse.update({
+                                content: '✅ ¡Perfil creado exitosamente!',
+                                embeds: [createdEmbed],
+                                components: createdComponents
+                            });
+                        }
+                    });
+                }
+                return;
             }
 
-            await interaction.reply({ embeds: [embed], components });
 
-            // ─── Collector botones ────────────────────────────────────────────
+            const embed = createProfileEmbed(profile, targetUser, moodLabel);
+            const components = createButtons({ isOwn, isPartnerRelation, isPublic });
+
+            await interaction.reply({ embeds: [embed], components, ephemeral: !isOwn && !isPublic });
+
             if (components.length > 0) {
                 const message = await interaction.fetchReply();
-
                 const collector = message.createMessageComponentCollector({
                     filter: i => i.user.id === author.id,
-                    time: 60000,
-                    max: 2
+                    time: 120000
                 });
 
                 collector.on('collect', async i => {
+                    const targetId = targetUser.id;
 
-                    // ✏️ Editar texto
-                    if (i.customId === `edit_partner_texto_${targetUser.id}`) {
+                    if (i.customId === 'edit_texto') {
+
+                        const currentProfile = await Profile.findOne({ userId: targetId });
 
                         const modal = new ModalBuilder()
-                            .setCustomId(`partnerEditModal_${targetUser.id}`)
-                            .setTitle(`Editando perfil de ${targetUser.username} 💕`);
+                            .setCustomId('edit_texto_modal')
+                            .setTitle('Editar texto 📝');
 
                         modal.addComponents(
                             new ActionRowBuilder().addComponents(
@@ -141,7 +334,7 @@ module.exports = {
                                     .setLabel('Nombre del personaje')
                                     .setStyle(TextInputStyle.Short)
                                     .setRequired(true)
-                                    .setValue(profile.characterName || '')
+                                    .setValue(currentProfile.characterName || '')
                             ),
                             new ActionRowBuilder().addComponents(
                                 new TextInputBuilder()
@@ -149,14 +342,14 @@ module.exports = {
                                     .setLabel('Descripción')
                                     .setStyle(TextInputStyle.Paragraph)
                                     .setRequired(true)
-                                    .setValue(profile.description || '')
+                                    .setValue(currentProfile.description || '')
                             )
                         );
 
                         await i.showModal(modal);
 
                         const modalSubmit = await i.awaitModalSubmit({
-                            time: 60000,
+                            time: 120000,
                             filter: j => j.user.id === author.id
                         }).catch(() => null);
 
@@ -166,48 +359,18 @@ module.exports = {
                         const newDesc = modalSubmit.fields.getTextInputValue('description');
 
                         await Profile.findOneAndUpdate(
-                            { userId: targetUser.id },
-                            { characterName: newName, description: newDesc, updatedAt: new Date() },
-                            { upsert: true }
+                            { userId: targetId },
+                            { characterName: newName, description: newDesc, updatedAt: new Date() }
                         );
 
-                        const updatedProfile = await Profile.findOne({ userId: targetUser.id });
-                        const updatedHasStats = updatedProfile?.stats &&
-                            Object.values(updatedProfile.stats).some(s => s.unlocked);
-
-                        const updatedDescLines = [];
-                        updatedDescLines.push(`**•** ${newDesc || '*Sin descripción.*'}`);
-                        updatedDescLines.push('');
-
-                        if (updatedHasStats) {
-                            updatedDescLines.push(separator);
-                            updatedDescLines.push('**📊 Stats:**');
-                            updatedDescLines.push(formatStats(updatedProfile.stats));
-                            updatedDescLines.push(separator);
-                        }
-
-                        const updatedEmbed = new EmbedBuilder()
-                            .setColor('#8b0808')
-                            .setTitle(`🐾 Perfil de ${newName}`)
-                            .setDescription(updatedDescLines.join('\n'))
-                            .setThumbnail(targetUser.displayAvatarURL({ dynamic: true }))
-                            .setFooter({ text: `${targetUser.username}  •  Editado por ${author.username} con amor 💕`, iconURL: interaction.client.user.displayAvatarURL() })
-                            .setTimestamp();
-
-                        if (updatedProfile?.image) updatedEmbed.setImage(updatedProfile.image);
-
                         await modalSubmit.reply({
-                            content: `✅ Perfil de ${targetUser.username} actualizado!`,
-                            embeds: [updatedEmbed],
+                            content: '✅ Texto actualizado!',
                             ephemeral: true
                         });
-                    }
 
-                    // 🖼️ Editar imagen
-                    if (i.customId === `edit_partner_imagen_${targetUser.id}`) {
-
+                    } else if (i.customId === 'edit_imagen') {
                         await i.reply({
-                            content: `📸 Adjunta la imagen de **${targetUser.username}** en tu próximo mensaje. Tienes 60 segundos.`,
+                            content: '📸 Adjunta la nueva imagen en tu próximo mensaje. Tienes 60 segundos.',
                             ephemeral: true
                         });
 
@@ -223,7 +386,7 @@ module.exports = {
 
                         if (!imageResponse || imageResponse.size === 0) {
                             return i.followUp({
-                                content: '⏳ No se recibió ninguna imagen válida a tiempo.',
+                                content: '⏳ No se recibió ninguna imagen válida.',
                                 ephemeral: true
                             });
                         }
@@ -231,13 +394,78 @@ module.exports = {
                         const imageUrl = imageResponse.first().attachments.first().url;
 
                         await Profile.findOneAndUpdate(
-                            { userId: targetUser.id },
-                            { image: imageUrl, updatedAt: new Date() },
-                            { upsert: true }
+                            { userId: targetId },
+                            { image: imageUrl, updatedAt: new Date() }
                         );
 
                         await i.followUp({
-                            content: `✅ Imagen de ${targetUser.username} actualizada! 🖼️`,
+                            content: '✅ Imagen actualizada! 🖼️',
+                            ephemeral: true
+                        });
+
+                    } else if (i.customId === 'edit_stats') {
+                        const availableStats = getAvailableStats(targetId);
+                        const statOptions = availableStats.map(stat => ({
+                            label: stat.charAt(0).toUpperCase() + stat.slice(1),
+                            value: stat,
+                            description: `Desbloquear ${stat}`
+                        }));
+
+                        const statSelect = new StringSelectMenuBuilder()
+                            .setCustomId('edit_stats_select')
+                            .setPlaceholder('Elige 4 stats')
+                            .setMinValues(4)
+                            .setMaxValues(4)
+                            .addOptions(statOptions);
+
+                        await i.reply({
+                            content: '🎲 Selecciona tus 4 stats:',
+                            components: [new ActionRowBuilder().addComponents(statSelect)],
+                            ephemeral: true
+                        });
+
+
+                        const statMsg = await i.fetchReply();
+
+                        const statResponse = await statMsg.awaitMessageComponent({
+                            componentType: ComponentType.StringSelect,
+                            time: 120000,
+                            filter: k => k.user.id === author.id
+                        }).catch(() => null);
+
+                        if (!statResponse) return;
+
+
+                        await unlockStats(targetId, statResponse.values);
+
+                        await statResponse.update({
+                            content: '✅ Stats actualizados!',
+                            components: []
+                        });
+
+                    } else if (i.customId === 'toggle_privacy') {
+                        const freshProfile = await Profile.findOne({ userId: targetId });
+                        const newPublic = !freshProfile.isPublic;
+
+                        await Profile.findOneAndUpdate(
+                            { userId: targetId },
+                            { isPublic: newPublic, updatedAt: new Date() }
+                        );
+
+
+                        const updatedProfile = await Profile.findOne({ userId: targetId });
+                        const updatedEmbed = createProfileEmbed(updatedProfile, targetUser, moodLabel);
+                        const updatedComponents = createButtons({
+                            isOwn: true,
+                            isPartnerRelation: false,
+                            isPublic: newPublic
+                        });
+
+                        await message.edit({ embeds: [updatedEmbed], components: updatedComponents });
+
+                        await i.reply({
+
+                            content: `✅ Perfil ahora es ${newPublic ? 'público 🌐' : 'privado 🔒'}.`,
                             ephemeral: true
                         });
                     }

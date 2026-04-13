@@ -6,36 +6,40 @@ const statSchema = new mongoose.Schema({
 }, { _id: false });
 
 const ProfileSchema = new mongoose.Schema({
-    userId: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    characterName: String,
-    description: String,
-    image: String,
-    // 🎲 Stats del personaje
-    stats: {
-        dominancia:  { ...statSchema.obj },
-        sumision:    { ...statSchema.obj },
-        afecto:      { ...statSchema.obj },
-        picardía:    { ...statSchema.obj },
-        lealtad:     { ...statSchema.obj },
-        nostalgia:   { ...statSchema.obj },
-        peso:        { ...statSchema.obj },
-        deseo:       { ...statSchema.obj },
-        dolor:       { ...statSchema.obj },
-        control:     { ...statSchema.obj },
-        apego:       { ...statSchema.obj }
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now
-    }
-});
+     userId: {
+         type: String,
+         required: true,
+         unique: true
+     },
+     characterName: String,
+     description: String,
+     image: String,
+     isPublic: {
+         type: Boolean,
+         default: false
+     },
+     // 🎲 Stats del personaje
+     stats: {
+         dominancia:  { ...statSchema.obj },
+         sumision:    { ...statSchema.obj },
+         afecto:      { ...statSchema.obj },
+         picardía:    { ...statSchema.obj },
+         lealtad:     { ...statSchema.obj },
+         nostalgia:   { ...statSchema.obj },
+         peso:        { ...statSchema.obj },
+         deseo:       { ...statSchema.obj },
+         dolor:       { ...statSchema.obj },
+         control:     { ...statSchema.obj },
+         apego:       { ...statSchema.obj }
+     },
+     createdAt: {
+         type: Date,
+         default: Date.now
+     },
+     updatedAt: {
+         type: Date,
+         default: Date.now
+     }
+ });
 
 module.exports = mongoose.model('Profile', ProfileSchema);

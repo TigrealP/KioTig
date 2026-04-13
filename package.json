@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "RUN_MODE=bot node index.js",
+    "start:api": "RUN_MODE=api node index.js",
+    "start:all": "RUN_MODE=all node index.js",
+    "check": "node -e \"console.log('ok')\""
   },
   "keywords": [],
   "author": "",

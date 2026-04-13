@@ -1,9 +1,9 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const { updateHappiness, updateStreak, updateMoment } = require('../utils/happiness');
+const { updateStats } = require('../utils/stats');
 
 const NOVIO_ID = '811091271023722586';
 const TU_ID = '765660693835415552';
-
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -26,26 +26,22 @@ module.exports = {
         let image;
 
         if (target.id === author.id) {
-
             if (author.id === TU_ID) {
                 return interaction.reply({
                     content: 'Estoy seguro que tu cachorrito está a la espera de tus órdenes, amo. 🐯🔥',
                     ephemeral: true
                 });
             }
-
             if (author.id === NOVIO_ID) {
                 return interaction.reply({
                     content: 'Estoy seguro que tu tigre quiere que seas un buen perrito para él hoy 🐶🔥',
                     ephemeral: true
                 });
             }
-
             return interaction.reply({
                 content: 'No puedes hacer eso contigo mismo 🦊',
                 ephemeral: true
             });
-
         }
 
         if (target.bot) {
@@ -61,12 +57,10 @@ module.exports = {
                     ephemeral: true
                 });
             }
-            else {
-                return interaction.reply({
-                    content: 'Los bots no participan es esto... aunque si quieres que tu dueño se ponga celoso, adelante 🦊',
-                    ephemeral: true
-                });
-            }
+            return interaction.reply({
+                content: 'Los bots no participan es esto... aunque si quieres que tu dueño se ponga celoso, adelante 🦊',
+                ephemeral: true
+            });
         }
 
         if (author.id === TU_ID) {
@@ -97,9 +91,7 @@ module.exports = {
                 'https://static1.e621.net/data/sample/87/98/879809cae04664be6389d9e79bd82762.jpg',
                 'https://media.discordapp.net/attachments/1477571857375957064/1488733740153835651/HErunx8bkAAOBHX.png?ex=69ce8396&is=69cd3216&hm=041c231c0033d7c98569fd037126ff89dc1a05879b6da8e4835b7d9f2b3887e8&=&format=webp&quality=lossless&width=1205&height=723'
             ];
-        }
-
-        else if (author.id === NOVIO_ID) {
+        } else if (author.id === NOVIO_ID) {
             color = '#8b0808';
             titulo = `${author.username} está mojadito y listo para su tigre 🐶🔥`;
             descripcion = `${author.username} Está complaciendo a su tigre en este preciso instante! ${target.username} 🐶🔥`;
@@ -118,20 +110,15 @@ module.exports = {
                 'https://static1.e621.net/data/sample/cb/8e/cb8e91df4f247e324907b16aae90943f.jpg',
                 'https://static1.e621.net/data/sample/f5/2c/f52cf0786a0322925a37c68989d6bf5e.jpg',
                 'https://media.discordapp.net/attachments/1477571857375957064/1488975314460737569/HE1gGuGW0AAV-T9.png?ex=69cebbd2&is=69cd6a52&hm=ac361326ba9f9c4cfe6cf11eea4f5cf6763b1f0cb744e2040f57a68f0da3fd14&=&format=webp&quality=lossless&width=589&height=827'
-            ]
-        }
-
-        else {
+            ];
+        } else {
             titulo = `${author.username} anda juguetón 😏`;
             descripcion = `${author.username} está molestando a ${target.username} 🔥`;
-
-            image = [
-                'https://static1.e621.net/data/sample/5b/10/5b10c2de6f589f94b84596df03a5cc3a.jpg'
-            ];
+            image = ['https://static1.e621.net/data/sample/5b/10/5b10c2de6f589f94b84596df03a5cc3a.jpg'];
         }
 
         const embed = new EmbedBuilder()
-            .setColor(color) // rojito pasión
+            .setColor(color)
             .setTitle(titulo)
             .setAuthor({
                 name: interaction.client.user.username,
@@ -148,7 +135,10 @@ module.exports = {
         await updateHappiness(author.id, target.id, 10);
         await updateStreak(author.id, target.id);
         await updateMoment(author.id, target.id, 'fuck');
+        await updateStats(author.id, target.id,
+            { picardía: 3, dominancia: author.id === TU_ID ? 2 : 0 },
+            { picardía: 3, deseo: 8, sumision: target.id === NOVIO_ID ? 2 : 0 }
+        );
         await interaction.reply({ embeds: [embed] });
-
     }
 };
