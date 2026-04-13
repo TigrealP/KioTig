@@ -122,30 +122,6 @@ module.exports = {
                     await updateMoment(author.id, targetUser.id, 'action');
                 }
 
-<<<<<<< HEAD
-                const actionStats = {
-                    // Mood mimoso
-                    pat: { authorStats: { afecto: 3 }, targetStats: { afecto: 3 } },
-                    acurrucar: { authorStats: { afecto: 3, apego: 4 }, targetStats: { afecto: 3, apego: 4 } },
-                    // Mood sumiso (ejecutor es el dominante)
-                    correa: { authorStats: { picardía: 3, dominancia: 3 }, targetStats: { sumision: 2, control: 6, dolor: 3, deseo: 4 } },
-                    lick: { authorStats: { picardía: 3 }, targetStats: { deseo: 5, dolor: 0 } },
-                    nalgada: { authorStats: { picardía: 3, dominancia: 2 }, targetStats: { dolor: 5, deseo: 4 } },
-                    provocar: { authorStats: { picardía: 3 }, targetStats: { deseo: 6 } },
-                    // Mood dominante (ejecutor es el sumiso)
-                    arrodillar: { authorStats: { picardía: 3, sumision: 3 }, targetStats: { dominancia: 3, control: 5 } },
-                    preparar: { authorStats: { picardía: 3, sumision: 2 }, targetStats: { dominancia: 2, control: 4, deseo: 5 } },
-                    lamer: { authorStats: { picardía: 3 }, targetStats: { deseo: 5, dominancia: 2 } },
-                    // Mood needy
-                    abrazo: { authorStats: { afecto: 3, apego: 3 }, targetStats: { afecto: 3, apego: 3, dolor: -5 } },
-                    besitos: { authorStats: { afecto: 4 }, targetStats: { afecto: 4, dolor: -4, deseo: 3 } },
-                    // Mood celoso
-                    poema: { authorStats: { afecto: 4 }, targetStats: { afecto: 4 } },
-                    atencion: { authorStats: { afecto: 3 }, targetStats: { afecto: 3 } }
-                };
-
-=======
->>>>>>> develop
                 if (actionStats[selectedValue]) {
                     await updateStats(
                         author.id,

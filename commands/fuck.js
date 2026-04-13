@@ -38,15 +38,6 @@ module.exports = {
                     ephemeral: true
                 });
             }
-<<<<<<< HEAD
-
-            await updateStats(author.id, target.id,
-                { picardía: 3, dominancia: author.id === TU_ID ? 2 : 0 },
-                { picardía: 3, deseo: 8, sumision: target.id === NOVIO_ID ? 2 : 0 }
-            );
-
-=======
->>>>>>> develop
             return interaction.reply({
                 content: 'No puedes hacer eso contigo mismo 🦊',
                 ephemeral: true
