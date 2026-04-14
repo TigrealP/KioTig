@@ -593,8 +593,9 @@ module.exports = {
 
                             const currentProfile = await Profile.findOne({ userId: targetId });
 
+                            const modalCustomId = `edit_texto_modal:${targetId}:${i.id}`;
                             const modal = new ModalBuilder()
-                                .setCustomId('edit_texto_modal')
+                                .setCustomId(modalCustomId)
                                 .setTitle('Editar texto 📝');
 
                             modal.addComponents(
@@ -620,7 +621,7 @@ module.exports = {
 
                             const modalSubmit = await i.awaitModalSubmit({
                                 time: 120000,
-                                filter: j => j.user.id === authorId
+                                filter: j => j.user.id === authorId && j.customId === modalCustomId
                             }).catch(() => null);
 
                             if (!modalSubmit) return;
