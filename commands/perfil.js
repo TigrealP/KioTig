@@ -1,7 +1,7 @@
 const {
     SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle,
     ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle,
-    StringSelectMenuBuilder, ComponentType
+    StringSelectMenuBuilder, ComponentType, MessageFlags
 } = require('discord.js');
 const { unlockStats, formatStats, FIXED_STATS, BLOCKED_STATS } = require('../utils/stats');
 const { uploadFromUrl, deleteImage } = require('../utils/cloudinary');
@@ -233,7 +233,7 @@ module.exports = {
                     )
                 ] : [];
 
-                await interaction.reply({ embeds: [embed], components, ephemeral: !isOwn });
+                await interaction.reply({ embeds: [embed], components, ...(!isOwn ? { flags: MessageFlags.Ephemeral } : {}) });
 
                 if (isOwn) {
                     const message = await interaction.fetchReply();
@@ -302,7 +302,7 @@ module.exports = {
                             await modalSubmit.reply({
                                 content: '🎲 Selecciona tus 4 stats iniciales:',
                                 components: [new ActionRowBuilder().addComponents(statSelect)],
-                                ephemeral: true
+                                flags: MessageFlags.Ephemeral
                             });
 
                             const statMsg = await modalSubmit.fetchReply();
@@ -352,7 +352,11 @@ module.exports = {
                 canEditStats: canEditStatsThisProfile
             });
 
-            await interaction.reply({ embeds: [embed], components, ephemeral: !isOwn && !isPublic });
+            await interaction.reply({
+                embeds: [embed],
+                components,
+                ...(!isOwn && !isPublic ? { flags: MessageFlags.Ephemeral } : {})
+            });
 
             if (components.length > 0) {
                 const message = await interaction.fetchReply();
@@ -374,11 +378,11 @@ module.exports = {
                             if (!isEditingOwnProfile) {
                                 return i.reply({
                                     content: '❌ Solo puedes exportar tu propio perfil.',
-                                    ephemeral: true
+                                    flags: MessageFlags.Ephemeral
                                 });
                             }
 
-                            await i.deferReply({ ephemeral: true });
+                            await i.deferReply({ flags: MessageFlags.Ephemeral });
                             const current = await Profile.findOne({ userId: targetId });
 
                             if (!current.characterName || !current.description) {
@@ -391,13 +395,19 @@ module.exports = {
                                 let imageUrl = null;
                                 let publicId = null;
 
+                                let imageExportWarning = '';
                                 if (current.image) {
-                                    const uploadResult = await uploadFromUrl(
-                                        current.image,
-                                        `profile_${targetId}_${Date.now()}`
-                                    );
-                                    imageUrl = uploadResult.url;
-                                    publicId = uploadResult.publicId;
+                                    try {
+                                        const uploadResult = await uploadFromUrl(
+                                            current.image,
+                                            `profile_${targetId}_${Date.now()}`
+                                        );
+                                        imageUrl = uploadResult.url;
+                                        publicId = uploadResult.publicId;
+                                    } catch (imageErr) {
+                                        console.error('Error exportando imagen del perfil:', imageErr);
+                                        imageExportWarning = '\n⚠️ No se pudo exportar la imagen actual (URL no disponible).';
+                                    }
                                 }
 
                                 await Profile.findOneAndUpdate(
@@ -416,7 +426,7 @@ module.exports = {
                                 );
 
                                 await i.editReply({
-                                    content: `🐶🐯🧡 Perfil exportado correctamente 📦\n\n**Nombre:** ${current.characterName}\n**Descripción:** ${current.description}${imageUrl ? `\n**Imagen guardada en:** ${imageUrl}` : ''}`
+                                    content: `🐶🐯🧡 Perfil exportado correctamente 📦\n\n**Nombre:** ${current.characterName}\n**Descripción:** ${current.description}${imageUrl ? `\n**Imagen guardada en:** ${imageUrl}` : ''}${imageExportWarning}`
                                 });
                             } catch (err) {
                                 console.error('Error exportando perfil:', err);
@@ -432,7 +442,7 @@ module.exports = {
                             if (!isEditingOwnProfile) {
                                 return i.reply({
                                     content: '❌ Solo puedes importar tus propios perfiles.',
-                                    ephemeral: true
+                                    flags: MessageFlags.Ephemeral
                                 });
                             }
 
@@ -441,7 +451,7 @@ module.exports = {
                             if (!current.exportedProfiles || current.exportedProfiles.length === 0) {
                                 return i.reply({
                                     content: '🐶🐯💔 No tienes ningún perfil exportado. Usa **Exportar perfil 📦** primero.',
-                                    ephemeral: true
+                                    flags: MessageFlags.Ephemeral
                                 });
                             }
 
@@ -460,7 +470,7 @@ module.exports = {
                             await i.reply({
                                 content: '📥 Selecciona el perfil que quieres importar:',
                                 components: [new ActionRowBuilder().addComponents(selectMenu)],
-                                ephemeral: true
+                                flags: MessageFlags.Ephemeral
                             });
 
                             const selectMsg = await i.fetchReply();
@@ -491,7 +501,7 @@ module.exports = {
 
                             await selectResponse.reply({
                                 content: `🐶🐯🧡 Perfil restaurado del ${selectedExport.exportedAt.toLocaleDateString('es-ES')} 📥`,
-                                ephemeral: true
+                                flags: MessageFlags.Ephemeral
                             });
                         }
 
@@ -500,7 +510,7 @@ module.exports = {
                             if (!isEditingOwnProfile) {
                                 return i.reply({
                                     content: '❌ Solo puedes eliminar tus propias exportaciones.',
-                                    ephemeral: true
+                                    flags: MessageFlags.Ephemeral
                                 });
                             }
 
@@ -509,7 +519,7 @@ module.exports = {
                             if (!current.exportedProfiles || current.exportedProfiles.length === 0) {
                                 return i.reply({
                                     content: '🐶🐯💔 No tienes ningún perfil exportado para eliminar.',
-                                    ephemeral: true
+                                    flags: MessageFlags.Ephemeral
                                 });
                             }
 
@@ -529,7 +539,7 @@ module.exports = {
                             await i.reply({
                                 content: '🗑️ Selecciona los perfiles a eliminar:',
                                 components: [new ActionRowBuilder().addComponents(selectMenu)],
-                                ephemeral: true
+                                flags: MessageFlags.Ephemeral
                             });
 
                             const selectMsg = await i.fetchReply();
@@ -577,7 +587,7 @@ module.exports = {
 
                             await selectResponse.reply({
                                 content: `🗑️ Eliminados ${indicesToDelete.length} perfil(es).`,
-                                ephemeral: true
+                                flags: MessageFlags.Ephemeral
                             });
                         }
 
@@ -587,7 +597,7 @@ module.exports = {
                             if (!isEditingOwnProfile && !isPublic && !isPartnerRelation) {
                                 return i.reply({
                                     content: '❌ No tienes permiso para editar este perfil.',
-                                    ephemeral: true
+                                    flags: MessageFlags.Ephemeral
                                 });
                             }
 
@@ -641,7 +651,7 @@ module.exports = {
 
                             await modalSubmit.reply({
                                 content: '✅ Texto actualizado!',
-                                ephemeral: true
+                                flags: MessageFlags.Ephemeral
                             });
                         }
 
@@ -651,13 +661,13 @@ module.exports = {
                             if (!isEditingOwnProfile && !isPublic && !isPartnerRelation) {
                                 return i.reply({
                                     content: '❌ No tienes permiso para editar este perfil.',
-                                    ephemeral: true
+                                    flags: MessageFlags.Ephemeral
                                 });
                             }
 
                             await i.reply({
                                 content: '🐯📸🐶 Adjunta la nueva imagen. Tienes 60 segundos.',
-                                ephemeral: true
+                                flags: MessageFlags.Ephemeral
                             });
 
                             const imageResponse = await interaction.channel.awaitMessages({
@@ -671,7 +681,7 @@ module.exports = {
                             }).catch(() => null);
 
                             if (!imageResponse || imageResponse.size === 0) {
-                                return i.followUp({ content: '⏳ No se recibió imagen válida.', ephemeral: true });
+                                return i.followUp({ content: '⏳ No se recibió imagen válida.', flags: MessageFlags.Ephemeral });
                             }
 
                             await Profile.findOneAndUpdate(
@@ -683,7 +693,7 @@ module.exports = {
                             const updatedEmbed = createProfileEmbed(updatedProfile, targetUser, moodLabel);
                             await message.edit({ embeds: [updatedEmbed] });
 
-                            await i.followUp({ content: '✅ Imagen actualizada! 🖼️', ephemeral: true });
+                            await i.followUp({ content: '✅ Imagen actualizada! 🖼️', flags: MessageFlags.Ephemeral });
                         }
 
                         // ────── EDITAR STATS ──────
@@ -694,7 +704,7 @@ module.exports = {
                             if (!canEditStatsProfile) {
                                 return i.reply({
                                     content: '❌ Solo tu pareja o tú mismo puedes editar los stats.',
-                                    ephemeral: true
+                                    flags: MessageFlags.Ephemeral
                                 });
                             }
 
@@ -708,7 +718,7 @@ module.exports = {
                             if (statOptions.length === 0) {
                                 return i.reply({
                                     content: '❌ No hay más stats disponibles para desbloquear.',
-                                    ephemeral: true
+                                    flags: MessageFlags.Ephemeral
                                 });
                             }
 
@@ -722,7 +732,7 @@ module.exports = {
                             await i.reply({
                                 content: '🎲 Selecciona 4 stats:',
                                 components: [new ActionRowBuilder().addComponents(statSelect)],
-                                ephemeral: true
+                                flags: MessageFlags.Ephemeral
                             });
 
                             const statMsg = await i.fetchReply();
@@ -749,7 +759,7 @@ module.exports = {
                             if (!isEditingOwnProfile) {
                                 return i.reply({
                                     content: '❌ Solo el dueño puede cambiar la privacidad del perfil.',
-                                    ephemeral: true
+                                    flags: MessageFlags.Ephemeral
                                 });
                             }
 
@@ -777,7 +787,7 @@ module.exports = {
 
                             await i.reply({
                                 content: `✅ Perfil ahora es ${newPublic ? 'público 🌐' : 'privado 🔒'}.`,
-                                ephemeral: true
+                                flags: MessageFlags.Ephemeral
                             });
                         }
                     } catch (error) {
@@ -785,7 +795,7 @@ module.exports = {
                         if (!i.replied && !i.deferred) {
                             await i.reply({
                                 content: '❌ Ocurrió un error al procesar tu solicitud.',
-                                ephemeral: true
+                                flags: MessageFlags.Ephemeral
                             });
                         }
                     }
@@ -795,7 +805,7 @@ module.exports = {
         } catch (error) {
             console.error(error);
             if (!interaction.replied && !interaction.deferred) {
-                await interaction.reply({ content: 'Hubo un error al mostrar el perfil.', ephemeral: true });
+                await interaction.reply({ content: 'Hubo un error al mostrar el perfil.', flags: MessageFlags.Ephemeral });
             }
         }
     }
